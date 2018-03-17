@@ -1,4 +1,3 @@
-//React
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from './Theme';
@@ -18,11 +17,11 @@ class App extends Component {
   render() {
     console.log(Store);
     return (
-      <Provider>
-        <MuiThemeProvider muiTheme={theme}>
+      <MuiThemeProvider muiTheme={theme}>
+        <Provider>
           <PageLayout store={Store}/>
-        </MuiThemeProvider>
-      </Provider>
+        </Provider>
+      </MuiThemeProvider>
     );
   }
 }

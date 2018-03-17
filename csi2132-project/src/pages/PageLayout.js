@@ -7,6 +7,7 @@ import TestActions from '../redux/actions/TestActions';
 //Pages
 
 //Components
+import CustomAppBar from '../components/CustomAppBar';
 
 class PageLayout extends Component {
   constructor(props) {
@@ -18,19 +19,16 @@ class PageLayout extends Component {
   }
 
   dispatch = (action) => {
-    console.log(action, this.props.store.getState());
     this.props.store.dispatch(action);
   }
 
   render() {
     var state = this.props.store.getState();
+    console.log(state);
     return (
       <div>
-
-        <div> {state.value} </div>
-        <button type="button" onClick={this.dispatch.bind(this, TestActions.increment())}>
-          Click Me!
-        </button>
+        <CustomAppBar store={this.props.store}/>
+        <span> {state.navbar.searchString} </span>
       </div>
     );
   }

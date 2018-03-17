@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import TestReducer from './TestReducer';
+import NavbarReducer from './NavbarReducer';
+import AppReducer from './AppReducer';
 
 export default (state, action) => {
   return {
-    value: TestReducer(state, action)
+    navbar: NavbarReducer(state.navbar, action),
+    app: AppReducer(state, action)
   };
 };
