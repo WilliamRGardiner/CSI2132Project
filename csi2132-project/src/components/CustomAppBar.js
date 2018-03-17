@@ -1,74 +1,74 @@
-import React, { Component } from 'react';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import _ from 'lodash';
-import appConstants from '../AppConstants';
+import React, { Component } from 'react'
+import muiThemeable from 'material-ui/styles/muiThemeable'
+import _ from 'lodash'
+import appConstants from '../AppConstants'
 
 //Redux
-import NavbarActions from '../redux/actions/NavbarActions';
-import AppActions from '../redux/actions/AppActions';
+import NavbarActions from '../redux/actions/NavbarActions'
+import AppActions from '../redux/actions/AppActions'
 
 //Components
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import AutoComplete from 'material-ui/AutoComplete';
-import FlatButton from 'material-ui/FlatButton';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
+import IconButton from 'material-ui/IconButton'
+import AutoComplete from 'material-ui/AutoComplete'
+import FlatButton from 'material-ui/FlatButton'
+import Popover from 'material-ui/Popover'
+import Menu from 'material-ui/Menu'
+import MenuItem from 'material-ui/MenuItem'
+import Dialog from 'material-ui/Dialog'
+import TextField from 'material-ui/TextField'
 
 //Icons
-import SearchIcon from 'material-ui/svg-icons/action/search';
+import SearchIcon from 'material-ui/svg-icons/action/search'
 
 class CustomAppBar extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   handleSearch = (searchString) => {
-    this.props.store.dispatch(NavbarActions.setSearchString(searchString));
+    this.props.store.dispatch(NavbarActions.setSearchString(searchString))
   }
 
   handlePopoverOpen = (event) => {
-    event.preventDefault();
-    this.props.store.dispatch(NavbarActions.openPopover(event.currentTarget));
+    event.preventDefault()
+    this.props.store.dispatch(NavbarActions.openPopover(event.currentTarget))
   }
 
   handlePopoverClose = () => {
-    this.props.store.dispatch(NavbarActions.closePopover());
+    this.props.store.dispatch(NavbarActions.closePopover())
   }
 
   handlePopoverMenuSelect = (e, item, index) => {
-    var value = item.props.value;
-    if(value === "logout") this.props.store.dispatch(AppActions.logout());
-    else this.props.store.dispatch(NavbarActions.selectPopoverItem(item.props.value));
-    this.handlePopoverClose();
+    var value = item.props.value
+    if(value === "logout") this.props.store.dispatch(AppActions.logout())
+    else this.props.store.dispatch(NavbarActions.selectPopoverItem(item.props.value))
+    this.handlePopoverClose()
   }
 
   handleSignInOpen = () => {
-    this.props.store.dispatch(NavbarActions.openSignInDialog());
+    this.props.store.dispatch(NavbarActions.openSignInDialog())
   }
 
   handleSignInClose = () => {
-    this.props.store.dispatch(NavbarActions.closeSignInDialog());
+    this.props.store.dispatch(NavbarActions.closeSignInDialog())
   }
 
   handleSignIn = () => {
-    this.props.store.dispatch(AppActions.signIn());
-    this.handleSignInClose();
+    this.props.store.dispatch(AppActions.signIn())
+    this.handleSignInClose()
   }
 
   handleUsernameUpdate = (e,value) => {
-    this.props.store.dispatch(NavbarActions.updateUsername(value));
+    this.props.store.dispatch(NavbarActions.updateUsername(value))
   }
 
   handlePasswordUpdate = (e,value) => {
-    this.props.store.dispatch(NavbarActions.updatePassword(value));
+    this.props.store.dispatch(NavbarActions.updatePassword(value))
   }
 
   render() {
-    var state = this.props.store.getState();
+    var state = this.props.store.getState()
     return (
       <div>
         <Toolbar>
@@ -115,12 +115,14 @@ class CustomAppBar extends Component {
           onRequestClose={ this.handleSignInClose }
         >
           <TextField value={state.navbar.username} floatingLabelText="Username" onChange={this.handleUsernameUpdate}/>
+          <br />
           <TextField value={state.navbar.password} floatingLabelText="Password" onChange={this.handlePasswordUpdate} type="password"/>
-          <a onClick={this.handleSignUp}> Sign Up </a>
+          <br />
+          <FlatButton label="Sign Up" onClick={this.handleSignUp} />
         </Dialog>
       </div>
-    );
-  };
+    )
+  }
 }
 
-export default muiThemeable()(CustomAppBar);
+export default muiThemeable()(CustomAppBar)

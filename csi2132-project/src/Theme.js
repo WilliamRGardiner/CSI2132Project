@@ -1,4 +1,4 @@
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default getMuiTheme({
   fontFamily: 'Ariel, sans-serif',
@@ -18,4 +18,4 @@ export default getMuiTheme({
     clockCircleColor: '#000000',
     shadowColor: '#000000',
   },
-});
+})

@@ -7,10 +7,10 @@ export default {
   ACTIONS: ACTION_TYPES,
 
   increment: () => {
-    return { type: ACTION_TYPES.INC };
+    return { type: ACTION_TYPES.INC }
   },
 
   decrement: () => {
-    return { type: ACTION_TYPES.DEC };
+    return { type: ACTION_TYPES.DEC }
   }
 }

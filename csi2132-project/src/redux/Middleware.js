@@ -1,5 +1,5 @@
-import { applyMiddleware } from 'redux';
-import logger from 'redux-logger';
-import promise from 'redux-promise-middleware';
+import { applyMiddleware } from 'redux'
+import logger from 'redux-logger'
+import promise from 'redux-promise-middleware'
 
-export default applyMiddleware(promise());
+export default applyMiddleware(promise())

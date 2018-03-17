@@ -1,11 +1,17 @@
+import appConstants from '../AppConstants';
+
 export default {
   app: {
-    user: "000"
+    user: null,
+    page: appConstants.PAGES.HOME
   },
   navbar: {
     searchString: "",
     dataSource: [],
     popoverOpen: false,
-    popoverAnchor: null
+    popoverAnchor: null,
+    signInOpen: false,
+    username: "",
+    password: ""
   }
 };

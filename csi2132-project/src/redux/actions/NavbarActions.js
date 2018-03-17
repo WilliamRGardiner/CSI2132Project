@@ -14,39 +14,39 @@ export default {
   ACTIONS: ACTION_TYPES,
 
   setSearchString: (payload) => {
-    return { type: ACTION_TYPES.SET, payload };
+    return { type: ACTION_TYPES.SET, payload }
   },
 
   clearSearch: () => {
-    return { type: ACTION_TYPES.CLR };
+    return { type: ACTION_TYPES.CLR }
   },
 
   openPopover: (payload) => {
-    return { type: ACTION_TYPES.OPEN, payload };
+    return { type: ACTION_TYPES.OPEN, payload }
   },
 
   closePopover: () => {
-    return { type: ACTION_TYPES.CLOSE };
+    return { type: ACTION_TYPES.CLOSE }
   },
 
   selectPopoverItem: (payload) => {
-    return { type: ACTION_TYPES.SELECT, payload };
+    return { type: ACTION_TYPES.SELECT, payload }
   },
 
   openSignInDialog: () => {
-    return { type: ACTION_TYPES.OPEN_SIGN_IN };
+    return { type: ACTION_TYPES.OPEN_SIGN_IN }
   },
 
   closeSignInDialog: () => {
-    return { type: ACTION_TYPES.CLOSE_SIGN_IN };
+    return { type: ACTION_TYPES.CLOSE_SIGN_IN }
   },
 
   updateUsername: (payload) => {
-    return { type: ACTION_TYPES.UPDATE_USERNAME, payload };
+    return { type: ACTION_TYPES.UPDATE_USERNAME, payload }
   },
 
   updatePassword: (payload) => {
-    return { type: ACTION_TYPES.UPDATE_PASSWORD, payload };
+    return { type: ACTION_TYPES.UPDATE_PASSWORD, payload }
   }
 
 }
