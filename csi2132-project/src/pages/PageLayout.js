@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+
+//Redux
 import TestActions from '../redux/actions/TestActions';
 
-import DisplayValue from './DisplayValue';
+//Pages
+
+//Components
 
 class PageLayout extends Component {
   constructor(props) {
@@ -21,7 +26,8 @@ class PageLayout extends Component {
     var state = this.props.store.getState();
     return (
       <div>
-        <div> {+state.value} </div>
+
+        <div> {state.value} </div>
         <button type="button" onClick={this.dispatch.bind(this, TestActions.increment())}>
           Click Me!
         </button>
@@ -30,4 +36,4 @@ class PageLayout extends Component {
   }
 }
 
-export default PageLayout;
+export default muiThemeable()(PageLayout);

@@ -1,7 +1,13 @@
+//React
 import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import theme from './Theme';
+
+//Redux
 import { Provider } from 'react-redux';
 import Store from './redux/Store';
 
+//Layout
 import PageLayout from './pages/PageLayout';
 
 class App extends Component {
@@ -13,7 +19,9 @@ class App extends Component {
     console.log(Store);
     return (
       <Provider>
-        <PageLayout store={Store}/>
+        <MuiThemeProvider muiTheme={theme}>
+          <PageLayout store={Store}/>
+        </MuiThemeProvider>
       </Provider>
     );
   }
