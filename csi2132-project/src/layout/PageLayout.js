@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import muiThemeable from 'material-ui/styles/muiThemeable'
 import Page from './Page'
 
-//Redux
-import TestActions from '../redux/actions/TestActions'
-
 //Components
-import CustomAppBar from '../components/CustomAppBar'
+import CustomAppBar from './CustomAppBar'
 
 class PageLayout extends Component {
   constructor(props) {
@@ -15,10 +12,6 @@ class PageLayout extends Component {
 
   componentWillMount() {
     this.props.store.subscribe(this.setState.bind(this, {}))
-  }
-
-  dispatch = (action) => {
-    this.props.store.dispatch(action)
   }
 
   render() {

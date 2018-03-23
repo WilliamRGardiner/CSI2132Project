@@ -9,9 +9,13 @@ import Store from './redux/Store'
 //Layout
 import PageLayout from './layout/PageLayout'
 
+//Database
+import DatabaseAccessFacade from './database/DatabaseAccessFacade'
+
 class App extends Component {
   constructor(props) {
     super(props)
+    DatabaseAccessFacade.setStore(Store)
   }
 
   render() {

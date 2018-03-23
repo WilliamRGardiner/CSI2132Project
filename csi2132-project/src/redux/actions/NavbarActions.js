@@ -3,7 +3,6 @@ const ACTION_TYPES = {
     CLR: "CLEAR_SEARCH_STRING",
     OPEN: "ACCOUNT_POPOVER_OPEN",
     CLOSE: "ACCOUNT_POPOVER_CLOSE",
-    SELECT: "ACCOUNT_OPITON_SELECT",
     UPDATE_USERNAME: "UPDATE_LOGIN_USERNAME",
     UPDATE_PASSWORD: "UPDATE_LOGIN_PASSWORD",
     OPEN_SIGN_IN: "OPEN_SIGN_IN_DIALOG",
@@ -27,10 +26,6 @@ export default {
 
   closePopover: () => {
     return { type: ACTION_TYPES.CLOSE }
-  },
-
-  selectPopoverItem: (payload) => {
-    return { type: ACTION_TYPES.SELECT, payload }
   },
 
   openSignInDialog: () => {

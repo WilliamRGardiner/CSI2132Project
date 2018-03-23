@@ -42,7 +42,7 @@ class CustomAppBar extends Component {
   handlePopoverMenuSelect = (e, item, index) => {
     var value = item.props.value
     if(value === "logout") this.props.store.dispatch(AppActions.logout())
-    else this.props.store.dispatch(NavbarActions.selectPopoverItem(item.props.value))
+    else this.props.store.dispatch(AppActions.setPage(item.props.value))
     this.handlePopoverClose()
   }
 
