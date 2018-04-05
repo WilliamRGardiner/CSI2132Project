@@ -152,10 +152,10 @@ export default (state, action) => {
       break
 
     case ItemsActions.ACTIONS.SET_RESTAURANT:
-      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data }
+      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data.restaurants }
       break
     case ItemsActions.ACTIONS.SET_MENU_ITEM:
-      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data }
+      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data.menuitems }
       break
 
     default:
