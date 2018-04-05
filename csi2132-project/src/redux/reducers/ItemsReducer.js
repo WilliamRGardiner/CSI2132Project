@@ -57,10 +57,10 @@ export default (state, action) => {
       newState.restaurant = { fetching: false, list: action.payload.data.restaurants, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATINGS+"_FULFILLED":
-      newState.rating = { fetching: false, list: action.payload.data, selected: null }
+      newState.rating = { fetching: false, list: action.payload.data.ratings, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RATING+"_FULFILLED":
-      newState.rating = { ...newState.rating, fetching: false, selected: action.payload.data }
+      newState.rating = { ...newState.rating, fetching: false, selected: action.payload.data.ratings }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS+"_FULFILLED":
       newState.menuItem = { fetching: false, list: action.payload.data.menuitems, selected: null }
@@ -72,19 +72,19 @@ export default (state, action) => {
       newState.menuItem = { fetching: false, list: action.payload.data.menuitems, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEM_RATINGS+"_FULFILLED":
-      newState.menuItemRating = { fetching: false, list: action.payload.data, selected: null }
+      newState.menuItemRating = { fetching: false, list: action.payload.data.ratings, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_MENU_ITEM_RATING+"_FULFILLED":
-      newState.menuItemRating = { ...newState.menuItemRating, fetching: false, selected: action.payload.data }
+      newState.menuItemRating = { ...newState.menuItemRating, fetching: false, selected: action.payload.data.ratings }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATERS+"_FULFILLED":
-      newState.rater = { fetching: false, list: action.payload.data, selected: null }
+      newState.rater = { fetching: false, list: action.payload.data.raters, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RATER+"_FULFILLED":
-      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data }
+      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data.raters }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATING_REVIEWS+"_FULFILLED":
-      newState.ratingReviews = { fetching: true, list: [] }
+      newState.ratingReviews = { fetching: true, list: action.payload.data.ratingreviews }
       break
 
     case DatabaseActions.ACTIONS.UPDATE_RESTAURANT+"_PENDING":
