@@ -53,33 +53,33 @@ class RestaurantDialog extends Component {
         }
           <TextField
             floatingLabelText="Street Address"
-            value={state.object["Street-address"]}
-            onChange={this.handleChange.bind(this, "Street-address")}
+            value={state.object.StreetAddress}
+            onChange={this.handleChange.bind(this, "StreetAddress")}
           /><br />
           <TextField
             floatingLabelText="Hour Open"
-            value={state.object["Hour-open"]}
-            onChange={this.handleChange.bind(this, "Hour-open")}
+            value={state.object.HourOpen}
+            onChange={this.handleChange.bind(this, "HourOpen")}
           /><br />
           <TextField
             floatingLabelText="Hour Closed"
-            value={state.object["Hour-closed"]}
-            onChange={this.handleChange.bind(this, "Hour-closed")}
+            value={state.object.HourClosed}
+            onChange={this.handleChange.bind(this, "HourClosed")}
           /><br />
           <TextField
             floatingLabelText="Phone Number"
-            value={state.object["Phone-number"]}
-            onChange={this.handleChange.bind(this, "Phone-number")}
+            value={state.object.PhoneNumber}
+            onChange={this.handleChange.bind(this, "PhoneNumber")}
           /><br />
           <TextField
-            floatingLabelText="First-openned"
-            value={state.object["First-openned"]}
-            onChange={this.handleChange.bind(this, "First-openned")}
+            floatingLabelText="First Openned"
+            value={state.object["FirstOpenDate"]}
+            onChange={this.handleChange.bind(this, "FirstOpenDate")}
           /><br />
           <TextField
             floatingLabelText="Manager"
-            value={state.object["Manager-name"]}
-            onChange={this.handleChange.bind(this, "Manager-name")}
+            value={state.object["ManagerName"]}
+            onChange={this.handleChange.bind(this, "ManagerName")}
           /><br />
         </Dialog>
     )

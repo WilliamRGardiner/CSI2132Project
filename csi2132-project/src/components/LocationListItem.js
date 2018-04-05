@@ -35,7 +35,7 @@ class RatingListItem extends Component {
           <div>
             <span> Phone: {this.props.item.PhoneNumber} </span> <br />
             <span> Manager: {this.props.item.ManagerName} </span> <br />
-            <span> Est.: {this.props.item.FirstOpennedDate} </span> <br />
+            <span> Est.: {this.props.item.FirstOpenDate} </span> <br />
             <br />
           </div>
         )}
