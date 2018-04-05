@@ -26,15 +26,24 @@ class RatingListItem extends Component {
   }
 
   render() {
+
+    var ratingSum = 0
+    var ratingCount = 0
+
+    ratingSum = this.props.item.Mood + this.props.item.Food + this.props.item.Staff
+    ratingCount += this.props.item.Mood ? 1 : 0
+    ratingCount += this.props.item.Food ? 1 : 0
+    ratingCount += this.props.item.Staff ? 1 : 0
+
     return (
       <StandardListItem
         title={this.props.item.UserID}
-        subtitle={<Rating value={this.props.item.Rating} />}
+        subtitle={<Rating value={ratingSum/ratingCount} />}
         image={MissingImage}
         expandable={(
           <div>
             <span> Date: {this.props.item.Date} </span> <br />
-            <span> {this.props.item.Comments} </span> <br />
+            <span> {this.props.item.Comment} </span> <br />
             <br />
             <CustomFlatButton
               label="Rater"
