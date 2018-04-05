@@ -48,13 +48,13 @@ export default (state, action) => {
       break
 
     case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS+"_FULFILLED":
-      newState.restaurant = { fetching: false, list: action.payload.data, selected: null }
+      newState.restaurant = { fetching: false, list: action.payload.data.restaurants, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RESTAURANT+"_FULFILLED":
-      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data }
+      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data.restaurants }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS_IN_CATEGORY+"_FULFILLED":
-      newState.restaurant = { fetching: false, list: action.payload.data, selected: null }
+      newState.restaurant = { fetching: false, list: action.payload.data.restaurants, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATINGS+"_FULFILLED":
       newState.rating = { fetching: false, list: action.payload.data, selected: null }
