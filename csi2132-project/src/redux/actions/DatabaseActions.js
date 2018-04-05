@@ -1,6 +1,8 @@
 import Database from '../../database/Mockdatabase'
 import axios from 'axios'
 
+const ADDRESS="localhost:8080"
+
 const ACTION_TYPES = {
     FETCH_ALL_RESTAURANTS: "FETCH_ALL_RESTAURANTS",
     FETCH_RESTAURANT: "FETCH_RESTAURANT",
@@ -44,56 +46,51 @@ export default {
   ACTIONS: ACTION_TYPES,
 
   fetchAllRestaurants: (store) => {
-    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS, payload: axios.get("/RestaurantAPI/rest/restaurant/get")}
+    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get")}
   },
 
   fetchRestaurant: (id, store) => {
-    return { type: ACTION_TYPES.FETCH_RESTAURANT, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+id)}
+    return { type: ACTION_TYPES.FETCH_RESTAURANT, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+id)}
   },
 
   fetchAllRestaurantsInCategory: (category, store) => {
-    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS_IN_CATEGORY, payload: axios.get("/RestaurantAPI/rest/category/get/"+category+"/restaurant") }
+    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS_IN_CATEGORY, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/category/get/"+category+"/restaurant") }
   },
 
   fetchAllRatings: (restaurantID, store) => {
-    return { type: ACTION_TYPES.FETCH_ALL_RATINGS, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating") }
+    return { type: ACTION_TYPES.FETCH_ALL_RATINGS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating") }
   },
 
   fetchRating: (restaurantID, userID, date, id, store) => {
-    return { type: ACTION_TYPES.FETCH_RATING, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating"+userID+"/"+date) }
+    return { type: ACTION_TYPES.FETCH_RATING, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating"+userID+"/"+date) }
   },
 
   fetchAllMenuItems: (restaurantID, store) => {
-    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem") }
+    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem") }
   },
 
   fetchMenuItem: (restaurantID, id, store) => {
-    return { type: ACTION_TYPES.FETCH_MENU_ITEM, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+id) }
+    return { type: ACTION_TYPES.FETCH_MENU_ITEM, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+id) }
   },
 
   fetchAllMenuItemsInCategory: (category, store) => {
-    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS_IN_CATEGORY + '_RESOLVED', payload: axios.get("/RestaurantAPI/rest/category/get/"+category+"/menuItem") }
+    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS_IN_CATEGORY, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/category/get/"+category+"/menuItem") }
   },
 
   fetchAllMenuItemRatings: (restaurantID, menuItemID, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_ALL_MENU_ITEM_RATINGS + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEM_RATINGS + '_RESOLVED', payload: Database.fetchAllMenuItemRatings(restaurantID, menuItemID) }
+    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEM_RATINGS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+menuItemID+"/rating") }
   },
 
   fetchMenuItemRating: (restaurantID, menuItemID, userID, date, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_MENU_ITEM_RATING + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_MENU_ITEM_RATING + '_RESOLVED', payload: Database.fetchMenuItemRating(restaurantID, menuItemID, userID, date) }
+    return { type: ACTION_TYPES.FETCH_MENU_ITEM_RATING, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+menuItemID+"/rating/"+userID+"/"+date) }
   },
 
   fetchAllRaters: (store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_ALL_RATERS + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_ALL_RATERS + '_RESOLVED', payload: Database.fetchAllRaters() }
-
+    return { type: ACTION_TYPES.FETCH_ALL_RATERS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/rater/get" }
   },
 
   fetchRater: (id, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_RATER + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_RATER + '_RESOLVED', payload: Database.fetchRater(id) }
+    return { type: ACTION_TYPES.FETCH_RATER, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/rater/get/"+id) }
   },
 
   login: (data, store) => {
