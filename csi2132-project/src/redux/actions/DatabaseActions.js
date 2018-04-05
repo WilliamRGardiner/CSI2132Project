@@ -93,8 +93,79 @@ export default {
     return { type: ACTION_TYPES.FETCH_RATER, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/rater/get/"+id) }
   },
 
+  updateRestaurant: () => {
+    return { type: UPDATE_RESTAURANT, payload: axios.put()}
+  },
+
+  updateMenuItem: () => {
+    return { type: UPDATE_MENU_ITEM, payload: axios.put()}
+  },
+
+  updateRating: () => {
+    return { type: UPDATE_RATING, payload: axios.put()}
+  },
+
+  updateMenuItemRating: () => {
+    return { type: UPDATE_MENU_ITEM_RATING, payload: axios.put()}
+  },
+
+  updateRater: () => {
+    return { type: UPDATE_RATER, payload: axios.put()}
+  },
+
+  updateLocation: () => {
+    return { type: UPDATE_LOCAITON, payload: axios.put()}
+  },
+
+  addRestaurant: () => {
+    return { type: ADD_RESTAURANT, payload: axios.post()}
+  },
+
+  addMenuItem: () => {
+    return { type: ADD_MENU_ITEM, payload: axios.post()}
+  },
+
+  addRating: () => {
+    return { type: ADD_RATING, payload: axios.post()}
+  },
+
+  addMenuItemRating: () => {
+    return { type: ADD_MENU_ITEM_RATING, payload: axios.post()}
+  },
+
+  addRater: () => {
+    return { type: ADD_RATER, payload: axios.post()}
+  },
+
+  addLocation: () => {
+    return { type: ADD_LOCAITON, payload: axios.post()}
+  },
+
+  deleteRestaurant: () => {
+    return { type: DELETE_RESTAURANT, payload: axios.del()}
+  },
+
+  deleteMenuItem: () => {
+    return { type: DELETE_MENU_ITEM, payload: axios.del()}
+  },
+
+  deleteRating: () => {
+    return { type: DELETE_RATING, payload: axios.del()}
+  },
+
+  deleteMenuItemRating: () => {
+    return { type: DELETE_MENU_ITEM_RATING, payload: axios.del()}
+  },
+
+  deleteRater: () => {
+    return { type: DELETE_RATER, payload: axios.del()}
+  },
+
+  deleteLocation: () => {
+    return { type: DELETE_LOCAITON, payload: axios.del()}
+  },
+
   login: (data, store) => {
-    store.dispatch({ type: ACTION_TYPES.LOGIN + '_PENDING' })
-    return { type: ACTION_TYPES.LOGIN + '_RESOLVED', payload: Database.login(data)}
+    return { type: LOGIN, payload: axios.post()}
   }
 }

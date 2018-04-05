@@ -20,10 +20,17 @@ export default {
   ],
   RESTAURANT_CATEGORIES: [
     "Ethnic",
+    "Mexican",
+    "Korean",
+    "Mediteranian",
+    "Canadian",
+    "Asian",
+    "Bar",
+    "Lebanese",
     "Fast Food",
     "Fast Casual",
     "Premium Casual",
     "Family Stlye",
     "Fine Dining"
-  ]
+  ],
 }
