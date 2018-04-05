@@ -98,7 +98,7 @@ export default {
   },
 
   updateMenuItem: () => {
-    return { type: ACTION_TYPESUPDATE_MENU_ITEM, payload: axios.put()}
+    return { type: ACTION_TYPES.UPDATE_MENU_ITEM, payload: axios.put()}
   },
 
   updateRating: () => {
