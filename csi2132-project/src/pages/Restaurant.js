@@ -47,6 +47,10 @@ class Restaurant extends Component {
   render() {
 
     const state = this.props.store.getState().items
+
+    if(state.restaurant.fetching)
+      return <div> Loading </div>
+
     const restaurant = state.restaurant.selected
     const menu = state.menuItem.list
     const ratings = state.rating.list
@@ -74,9 +78,6 @@ class Restaurant extends Component {
 
     var adder = this.props.store.getState().adder
 
-    if(state.restaurant.fetching)
-      return <div> Loading </div>
-    else
     return (
       <div>
         <ItemHeader
