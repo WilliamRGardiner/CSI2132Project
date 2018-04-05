@@ -1,6 +1,6 @@
 import Database from '../../database/Mockdatabase'
 import axios from 'axios'
-//
+
 const ACTION_TYPES = {
     FETCH_ALL_RESTAURANTS: "FETCH_ALL_RESTAURANTS",
     FETCH_RESTAURANT: "FETCH_RESTAURANT",
