@@ -1,7 +1,7 @@
 import Database from '../../database/Mockdatabase'
 import axios from 'axios'
 
-const ADDRESS="localhost:8080"
+const ADDRESS="http://localhost:8080"
 
 const ACTION_TYPES = {
     FETCH_ALL_RESTAURANTS: "FETCH_ALL_RESTAURANTS",
