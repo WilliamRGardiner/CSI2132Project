@@ -74,6 +74,9 @@ class Restaurant extends Component {
 
     var adder = this.props.store.getState().adder
 
+    if(state.restaurant.fetching)
+      return <div> Loading </div>
+    else
     return (
       <div>
         <ItemHeader
