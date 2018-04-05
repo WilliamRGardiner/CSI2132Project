@@ -53,7 +53,7 @@ export default (state, action) => {
       newState.restaurant = { fetching: false, list: action.payload.data.restaurants, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RESTAURANT+"_FULFILLED":
-      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data.restaurants }
+      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS_IN_CATEGORY+"_FULFILLED":
       newState.restaurant = { fetching: false, list: action.payload.data.restaurants, selected: null }
@@ -68,7 +68,7 @@ export default (state, action) => {
       newState.menuItem = { fetching: false, list: action.payload.data.menuitems, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_MENU_ITEM+"_FULFILLED":
-      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data.menuitems }
+      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS_IN_CATEGORY+"_FULFILLED":
       newState.menuItem = { fetching: false, list: action.payload.data.menuitems, selected: null }
