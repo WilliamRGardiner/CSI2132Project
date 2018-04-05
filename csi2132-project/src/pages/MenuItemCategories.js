@@ -3,7 +3,10 @@ import appConstants from '../AppConstants'
 import muiThemeable from 'material-ui/styles/muiThemeable'
 
 //Redux
-import AppActions from '../redux/actions/AppActions'
+import ItemsActions from '../redux/actions/AppActions'
+
+//Database
+import Database from '../database/DatabaseAccessFacade'
 
 //Components
 import Tile from '../components/Tile'
@@ -14,47 +17,41 @@ import MenuItemImage from '../images/menu_item.jpeg'
 import FeaturedImage from '../images/featured.jpg'
 import RaterImage from '../images/rater.jpg'
 
-class HomePage extends Component {
+class MenuItemCategories extends Component {
 
   handleTileClick = (value) => {
-    this.props.store.dispatch(AppActions.setRestaurantCategory(value))
-    this.props.store.dispatch(AppActions.setPage(appConstants.PAGES.MENU_ITEM_LIST))
+    console.log(value)
+    this.props.store.dispatch(ItemsActions.setMenuItemCategory(value))
+    Database.fetchAllMenuItemsInCategory(value)
+    this.props.store.dispatch(ItemsActions.setPage(appConstants.PAGES.MENU_ITEM_LIST))
   }
 
   render() {
-
-    const state = this.props.store.getState().items.menuItemCategory
-    console.log(state)
-
-    if(state.fetching) return <div> Loading </div>
-    else {
-
-      const tiles = state.list.map(
-        (item) => {
-          return (
-            <Tile
-              value={item}
-              image={MenuItemImage}
-              title={item}
-              onClick={this.handleTileClick}
-              format="small"/>
-          )
-        }
-      )
-
-      return (
-        <div>
+    const tiles = appConstants.MENU_ITEM_CATEGORIES.map(
+      (item) => {
+        return (
           <Tile
-            value=""
+            value={item}
             image={MenuItemImage}
-            title="Any"
-            onClick={this.handleTileClick}
+            title={item}
+            onClick={this.handleTileClick.bind(this, item)}
             format="small"/>
-          {tiles}
-        </div>
-      )
-    }
+        )
+      }
+    )
+
+    return (
+      <div>
+        <Tile
+          value="any"
+          image={MenuItemImage}
+          title="Any"
+          onClick={this.handleTileClick.bind(this, "any")}
+          format="small"/>
+        {tiles}
+      </div>
+    )
   }
 }
 
-export default muiThemeable()(HomePage)
+export default muiThemeable()(MenuItemCategories)

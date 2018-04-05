@@ -1,8 +1,12 @@
 import appConstants from '../../AppConstants'
 import appActions from '../actions/AppActions'
 import navbarActions from '../actions/NavbarActions'
+import databaseAction from '../actions/DatabaseActions'
+
+import Database from '../../database/DatabaseAccessFacade'
 
 export default (state, action) => {
+  console.log(state)
   const newState = JSON.parse(JSON.stringify(state))
   switch(action.type){
     case appActions.ACTIONS.SET_PAGE:
@@ -14,8 +18,8 @@ export default (state, action) => {
       newState.user = null
       return newState.app
       break
-    case appActions.ACTIONS.SIGN_IN_ATTEMPT:
-      newState.app.user = state.navbar.username
+    case databaseAction.ACTIONS.LOGIN+"_RESOLVED":
+      newState.app.user = action.payload.sucess ? action.payload.user : null
       return newState.app
       break
     default:
