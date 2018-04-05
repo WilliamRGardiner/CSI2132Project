@@ -7,6 +7,8 @@ import appConstants from '../AppConstants'
 import NavbarActions from '../redux/actions/NavbarActions'
 import AppActions from '../redux/actions/AppActions'
 
+import Database from '../database/DatabaseAccessFacade'
+
 //Components
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
@@ -17,6 +19,7 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
+import Paper from 'material-ui/Paper'
 
 //Icons
 import SearchIcon from 'material-ui/svg-icons/action/search'
@@ -40,6 +43,7 @@ class CustomAppBar extends Component {
   }
 
   handlePopoverMenuSelect = (e, item, index) => {
+    console.log(item)
     var value = item.props.value
     if(value === "logout") this.props.store.dispatch(AppActions.logout())
     else this.props.store.dispatch(AppActions.setPage(item.props.value))
@@ -55,8 +59,8 @@ class CustomAppBar extends Component {
   }
 
   handleSignIn = () => {
-    this.props.store.dispatch(AppActions.signIn())
-    this.handleSignInClose()
+    const state = this.props.store.getState().navbar
+    Database.login({Username: state.username, password: state.password}, this.props.store)
   }
 
   handleUsernameUpdate = (e,value) => {
@@ -70,7 +74,7 @@ class CustomAppBar extends Component {
   render() {
     var state = this.props.store.getState()
     return (
-      <div>
+      <Paper>
         <Toolbar>
           <ToolbarGroup>
             <IconButton>
@@ -95,10 +99,10 @@ class CustomAppBar extends Component {
                     anchorEl={state.navbar.popoverAnchor}
                     anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                     targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                    onRequestClose={this.handleRequestClose}
+                    onRequestClose={this.handlePopoverClose}
                   >
                     <Menu onItemClick={this.handlePopoverMenuSelect}>
-                      <MenuItem value={appConstants.PAGES.PROFILE} primaryText="Profile" />
+                      <MenuItem value={appConstants.PAGES.RATER} primaryText="Profile" />
                       <MenuItem value={"logout"} primaryText="Logout" />
                     </Menu>
                   </Popover>
@@ -109,18 +113,21 @@ class CustomAppBar extends Component {
         </Toolbar>
         <Dialog
           title="Sign In"
-          actions={ [<FlatButton label="Sign In" primary={true} onClick={this.handleSignIn}/>] }
+          actions={[
+            <FlatButton label="Cancel" secondary={true} onClick={this.handleSignInClose}/>,
+            <FlatButton label="Sign In" primary={true} onClick={this.handleSignIn}/>,
+            <FlatButton label="Sign Up" primary={true} onClick={this.handleSignUp} />
+          ]}
           modal={false}
           open={ state.navbar.signInOpen }
           onRequestClose={ this.handleSignInClose }
         >
-          <TextField value={state.navbar.username} floatingLabelText="Username" onChange={this.handleUsernameUpdate}/>
+          <TextField errorText={state.navbar.signInError ? "Invalid Username or Password" : ""} value={state.navbar.username} floatingLabelText="Username" onChange={this.handleUsernameUpdate}/>
           <br />
-          <TextField value={state.navbar.password} floatingLabelText="Password" onChange={this.handlePasswordUpdate} type="password"/>
+          <TextField errorText={state.navbar.signInError ? "Invalid Username or Password" : ""} value={state.navbar.password} floatingLabelText="Password" onChange={this.handlePasswordUpdate} type="password"/>
           <br />
-          <FlatButton label="Sign Up" onClick={this.handleSignUp} />
         </Dialog>
-      </div>
+      </ Paper>
     )
   }
 }
