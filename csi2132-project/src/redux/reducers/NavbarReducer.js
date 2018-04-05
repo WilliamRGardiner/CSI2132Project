@@ -1,5 +1,4 @@
 import actions from '../actions/NavbarActions'
-import databaseActions from '../actions/DatabaseActions'
 
 export default (state, action) => {
   switch(action.type) {
@@ -29,9 +28,6 @@ export default (state, action) => {
       break
     case actions.ACTIONS.UPDATE_PASSWORD:
       return {...state, password: action.payload}
-      break
-    case databaseActions.ACTIONS.LOGIN+"_RESOLVED":
-      return {...state, signInOpen: !action.payload.sucess, signInError: !action.payload.sucess}
       break
     default:
       return {...state}

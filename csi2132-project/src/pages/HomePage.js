@@ -19,14 +19,15 @@ import RaterImage from '../images/rater.jpg'
 
 class HomePage extends Component {
   handleTileClick = (value) => {
-    Database.fetchAllRaters()
     switch(value){
       case appConstants.PAGES.RESTAURANT_CATEGORIES:
+        Database.fetchAllRestaurantCategories()
         break
       case appConstants.PAGES.RATERS:
         Database.fetchAllRaters()
         break
       case appConstants.PAGES.MENU_ITEM_CATEGORIES:
+        Database.fetchAllMenuItemCategories()
         break
       case appConstants.PAGES.FEATURED:
         break
