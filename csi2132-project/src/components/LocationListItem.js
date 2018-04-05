@@ -28,14 +28,14 @@ class RatingListItem extends Component {
   render() {
     return (
       <StandardListItem
-        title={this.props.item["Street-address"]}
-        subtitle={this.props.item["Hour-open"] + " - " + this.props.item["Hour-closed"]}
+        title={this.props.item.StreetAddress}
+        subtitle={this.props.item.HourOpen + " - " + this.props.item.HourClosed}
         image={MissingImage}
         expandable={(
           <div>
-            <span> Phone: {this.props.item["Phone-number"]} </span> <br />
-            <span> Manager: {this.props.item["Manager-name"]} </span> <br />
-            <span> Est.: {this.props.item["First-openned"]} </span> <br />
+            <span> Phone: {this.props.item.PhoneNumber} </span> <br />
+            <span> Manager: {this.props.item.ManagerName} </span> <br />
+            <span> Est.: {this.props.item.FirstOpennedDate} </span> <br />
             <br />
           </div>
         )}
