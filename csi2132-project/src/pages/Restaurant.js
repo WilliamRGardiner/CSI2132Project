@@ -74,7 +74,7 @@ class Restaurant extends Component {
 
     var menuItems = menu.map(item => <MenuItemListItem store={this.props.store} item={item} primary={true} context="restaurant"/>)
     var ratingItems = ratings.map(item => <RatingListItem store={this.props.store} item={item} primary={true} context="restaurant"/>)
-    var loctionItems = restaurant.locations ? restaurant.locations.map(item => <LocationListItem store={this.props.store} item={item} />) : <div></div>
+    var loctionItems = restaurant && restaurant.locations ? restaurant.locations.map(item => <LocationListItem store={this.props.store} item={item} />) : <div></div>
 
     var adder = this.props.store.getState().adder
 
