@@ -36,13 +36,15 @@ class MenuItem extends Component {
       }
     }
 
-    var ratingSum = 0
-    var ratingCount = 0
-    for(var r of ratings) {
-      ratingSum += r.Rating
-      ratingCount += r.Rating > 0 ? 1 : 0
-    }
 
+    if(ratings && ratings.length > 0){
+      var ratingSum = 0
+      var ratingCount = 0
+      for(var r of ratings) {
+        ratingSum += r.Rating
+        ratingCount += r.Rating > 0 ? 1 : 0
+      }
+    }
     var ratingItems = ratings.map(item => <RatingListItem store={this.props.store} item={item} primary={true}/>)
 
     return (

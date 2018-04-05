@@ -34,7 +34,7 @@ class Rater extends Component {
           image={MissingImage}
           title={rater.username}
           subtitle={rater.Type || "No Type"}
-          rating={rater.Reputation || "0"}
+          rating={rater.Reputation || "1"}
         />
       </div>
     )
