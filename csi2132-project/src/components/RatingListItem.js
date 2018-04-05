@@ -38,7 +38,7 @@ class RatingListItem extends Component {
     return (
       <StandardListItem
         title={this.props.item.UserID}
-        subtitle={<Rating value={ratingSum/ratingCount} />}
+        subtitle={<Rating value={this.props.item.Rating || (ratingSum/ratingCount)} />}
         image={MissingImage}
         expandable={(
           <div>
