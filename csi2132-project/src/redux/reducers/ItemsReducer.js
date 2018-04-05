@@ -48,40 +48,40 @@ export default (state, action) => {
       break
 
     case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS+"_FULFILLED":
-      newState.restaurant = { fetching: false, list: action.payload, selected: null }
+      newState.restaurant = { fetching: false, list: action.payload.data, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RESTAURANT+"_FULFILLED":
-      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload }
+      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS_IN_CATEGORY+"_FULFILLED":
-      newState.restaurant = { fetching: false, list: action.payload, selected: null }
+      newState.restaurant = { fetching: false, list: action.payload.data, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATINGS+"_FULFILLED":
-      newState.rating = { fetching: false, list: action.payload, selected: null }
+      newState.rating = { fetching: false, list: action.payload.data, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RATING+"_FULFILLED":
-      newState.rating = { ...newState.rating, fetching: false, selected: action.payload }
+      newState.rating = { ...newState.rating, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS+"_FULFILLED":
-      newState.menuItem = { fetching: false, list: action.payload, selected: null }
+      newState.menuItem = { fetching: false, list: action.payload.data, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_MENU_ITEM+"_FULFILLED":
-      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload }
+      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS_IN_CATEGORY+"_FULFILLED":
-      newState.menuItem = { fetching: false, list: action.payload, selected: null }
+      newState.menuItem = { fetching: false, list: action.payload.data, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEM_RATINGS+"_FULFILLED":
-      newState.menuItemRating = { fetching: false, list: action.payload, selected: null }
+      newState.menuItemRating = { fetching: false, list: action.payload.data, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_MENU_ITEM_RATING+"_FULFILLED":
-      newState.menuItemRating = { ...newState.menuItemRating, fetching: false, selected: action.payload }
+      newState.menuItemRating = { ...newState.menuItemRating, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATERS+"_FULFILLED":
-      newState.rater = { fetching: false, list: action.payload, selected: null }
+      newState.rater = { fetching: false, list: action.payload.data, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RATER+"_FULFILLED":
-      newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
+      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATING_REVIEWS+"_FULFILLED":
       newState.ratingReviews = { fetching: true, list: [] }
@@ -104,17 +104,17 @@ export default (state, action) => {
       break
 
     case DatabaseActions.ACTIONS.UPDATE_RESTAURANT+"_FULFILLED":
-      newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
+      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.UPDATE_MENU_ITEM+"_FULFILLED":
-      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload }
+      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.UPDATE_RATING+"_FULFILLED":
       break
     case DatabaseActions.ACTIONS.UPDATE_MENU_ITEM_RATING+"_FULFILLED":
       break
     case DatabaseActions.ACTIONS.UPDATE_RATER+"_FULFILLED":
-      newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
+      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.UPDATE_LOCAITON+"_FULFILLED":
       break
@@ -136,26 +136,26 @@ export default (state, action) => {
       break
 
     case DatabaseActions.ACTIONS.ADD_RESTAURANT+"_FULFILLED":
-      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload }
+      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.ADD_MENU_ITEM+"_FULFILLED":
-      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload }
+      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.ADD_RATING+"_FULFILLED":
       break
     case DatabaseActions.ACTIONS.ADD_MENU_ITEM_RATING+"_FULFILLED":
       break
     case DatabaseActions.ACTIONS.ADD_RATER+"_FULFILLED":
-      newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
+      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.ADD_LOCAITON+"_FULFILLED":
       break
 
     case ItemsActions.ACTIONS.SET_RESTAURANT:
-      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload }
+      newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload.data }
       break
     case ItemsActions.ACTIONS.SET_MENU_ITEM:
-      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload }
+      newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload.data }
       break
 
     default:
