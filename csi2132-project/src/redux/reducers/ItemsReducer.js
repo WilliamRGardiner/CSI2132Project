@@ -83,7 +83,7 @@ export default (state, action) => {
       newState.rater = { fetching: false, list: action.payload.data.raters, selected: null }
       break
     case DatabaseActions.ACTIONS.FETCH_RATER+"_FULFILLED":
-      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data.raters }
+      newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATING_REVIEWS+"_FULFILLED":
       newState.ratingReviews = { fetching: false, list: action.payload.data.ratingreviews }
