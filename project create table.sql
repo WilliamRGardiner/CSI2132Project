@@ -1,5 +1,5 @@
 CREATE TABLE rater(
-    user_id INTEGER PRIMARY KEY,
+    userID INTEGER PRIMARY KEY,
     email TEXT,
     name TEXT NOT NULL,
     join_date DATE NOT NULL,
@@ -9,51 +9,51 @@ CREATE TABLE rater(
     password TEXT
 );
 CREATE TABLE restaurant(
-	restaurant_id INTEGER PRIMARY KEY,
+	restaurantID INTEGER PRIMARY KEY,
 	name TEXT NOT NULL,
 	type TEXT,
 	url TEXT
 );
 CREATE TABLE Rating(
-	user_id INTEGER REFERENCES rater(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	userID INTEGER REFERENCES rater(userID) ON DELETE CASCADE ON UPDATE CASCADE,
 	date DATE,
 	price NUMERIC(7,2) CHECK (price>=0),
 	food INTEGER CHECK (food>=1 AND food<=5),
 	mood INTEGER CHECK (mood>=1 AND food<=5),
 	staff INTEGER CHECK (staff>=1 AND staff<=5),
 	comments TEXT,
-	restaurant_id INTEGER REFERENCES restaurant(restaurant_id) ON DELETE CASCADE ON UPDATE CASCADE
+	restaurantID INTEGER REFERENCES restaurant(restaurantID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 Create Table location(
-	location_id INTEGER PRIMARY KEY,
+	locationID INTEGER PRIMARY KEY,
 	open_date DATE NOT NULL,
 	manager_name TEXT NOT NULL,
 	phone_number TEXT NOT NULL,
 	address TEXT NOT NULL,
 	opening_time TIME NOT NULL,
 	closing_time TIME NOT NULL,
-	restaurant_id INTEGER REFERENCES restaurant(restaurant_id) ON DELETE CASCADE ON UPDATE CASCADE
+	restaurantID INTEGER REFERENCES restaurant(restaurantID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE menuitem(
-	item_id INTEGER PRIMARY KEY,
+	itemID INTEGER PRIMARY KEY,
 	name TEXT NOT NULL,
 	type TEXT NOT NULL,
 	category TEXT NOT NULL,
 	description TEXT,
 	price NUMERIC (7,2) NOT NULL CHECK (price>=0),
-	restaurant_id INTEGER REFERENCES restaurant(restaurant_id) ON DELETE CASCADE ON UPDATE CASCADE
+	restaurantID INTEGER REFERENCES restaurant(restaurantID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE ratingitem(
-	user_id INTEGER REFERENCES rater(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	userID INTEGER REFERENCES rater(userID) ON DELETE CASCADE ON UPDATE CASCADE,
 	date DATE NOT NULL,
-	item_id INTEGER REFERENCES menuitem(item_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	itemID INTEGER REFERENCES menuitem(itemID) ON DELETE CASCADE ON UPDATE CASCADE,
 	rating INTEGER NOT NULL CHECK(rating>=1 AND rating<=5),
 	comments TEXT
 );
 Create Table ratingvotes(
-	user_id INTEGER REFERENCES rater(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	rater_id INTEGER PRIMARY KEY,
-	restaurant_id INTEGER REFERENCES restaurant(restaurant_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	userID INTEGER REFERENCES rater(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+	raterID INTEGER PRIMARY KEY,
+	restaurantID INTEGER REFERENCES restaurant(restaurantID) ON DELETE CASCADE ON UPDATE CASCADE,
 	type TEXT CHECK (type IN('UP','DOWN'))
 );
 
@@ -308,3 +308,27 @@ INSERT INTO menuitem VALUES(36,'Fish and Chips','food','main','description',10,1
 INSERT INTO menuitem VALUES(37,'Poutine','food','main','description',5,11);
 INSERT INTO menuitem VALUES(38,'Jager Bombs','food','main','description',2.50,11);
 INSERT INTO menuitem VALUES(39,'Wings','food','main','description',0.35,11);
+
+INSERT INTO ratingitem VALUES(0,'2018-04-05',0,3,'comments');
+INSERT INTO ratingitem VALUES(0,'2018-04-05',1,4,'good comments');
+INSERT INTO ratingitem VALUES(1,'2018-04-05',0,3,'comments');
+INSERT INTO ratingitem VALUES(1,'2018-04-05',1,3,'comments');
+INSERT INTO ratingitem VALUES(2,'2018-04-05',2,3,'comments');
+INSERT INTO ratingitem VALUES(2,'2018-04-05',3,3,'comments');
+INSERT INTO ratingitem VALUES(3,'2018-04-05',4,3,'comments');
+INSERT INTO ratingitem VALUES(3,'2018-04-05',5,3,'comments');
+INSERT INTO ratingitem VALUES(1,'2018-04-05',6,3,'comments');
+INSERT INTO ratingitem VALUES(1,'2018-04-05',7,3,'comments');
+INSERT INTO ratingitem VALUES(4,'2018-04-05',8,3,'comments');
+INSERT INTO ratingitem VALUES(4,'2018-04-05',9,3,'comments');
+INSERT INTO ratingitem VALUES(5,'2018-04-05',10,3,'comments');
+INSERT INTO ratingitem VALUES(6,'2018-04-05',11,3,'comments');
+
+INSERT INTO ratingvotes VALUES(0,0,0,'UP');
+INSERT INTO ratingvotes VALUES(1,1,1,'DOWN');
+INSERT INTO ratingvotes VALUES(2,2,2,'UP');
+INSERT INTO ratingvotes VALUES(3,3,3,'DOWN');
+INSERT INTO ratingvotes VALUES(4,4,4,'UP');
+INSERT INTO ratingvotes VALUES(5,5,5,'DOWN');
+INSERT INTO ratingvotes VALUES(6,6,6,'UP');
+INSERT INTO ratingvotes VALUES(7,7,7,'DOWN');
