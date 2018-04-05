@@ -6,6 +6,8 @@ import ItemsActions from '../actions/ItemsActions'
 
 export default (state, action) => {
   const newState = JSON.parse(JSON.stringify(state))
+  console.log(action.type)
+  console.log(DatabaseActions.ACTIONS.FETCH_ALL_RATINGS+"_FULFILLED")
   switch(action.type){
     case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS+"_PENDING":
       newState.restaurant = { fetching: true, list: [], selected: null };
@@ -84,7 +86,7 @@ export default (state, action) => {
       newState.rater = { ...newState.rater, fetching: false, selected: action.payload.data.raters }
       break
     case DatabaseActions.ACTIONS.FETCH_ALL_RATING_REVIEWS+"_FULFILLED":
-      newState.ratingReviews = { fetching: true, list: action.payload.data.ratingreviews }
+      newState.ratingReviews = { fetching: false, list: action.payload.data.ratingreviews }
       break
 
     case DatabaseActions.ACTIONS.UPDATE_RESTAURANT+"_PENDING":
