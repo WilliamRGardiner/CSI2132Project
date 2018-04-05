@@ -47,43 +47,43 @@ export default (state, action) => {
       newState.rater = { ...newState.rater, fetching: true, selected: null }
       break
 
-    case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS+"_FULFILLED":
       newState.restaurant = { fetching: false, list: action.payload, selected: null }
       break
-    case DatabaseActions.ACTIONS.FETCH_RESTAURANT+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_RESTAURANT+"_FULFILLED":
       newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS_IN_CATEGORY+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_RESTAURANTS_IN_CATEGORY+"_FULFILLED":
       newState.restaurant = { fetching: false, list: action.payload, selected: null }
       break
-    case DatabaseActions.ACTIONS.FETCH_ALL_RATINGS+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_RATINGS+"_FULFILLED":
       newState.rating = { fetching: false, list: action.payload, selected: null }
       break
-    case DatabaseActions.ACTIONS.FETCH_RATING+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_RATING+"_FULFILLED":
       newState.rating = { ...newState.rating, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS+"_FULFILLED":
       newState.menuItem = { fetching: false, list: action.payload, selected: null }
       break
-    case DatabaseActions.ACTIONS.FETCH_MENU_ITEM+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_MENU_ITEM+"_FULFILLED":
       newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS_IN_CATEGORY+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEMS_IN_CATEGORY+"_FULFILLED":
       newState.menuItem = { fetching: false, list: action.payload, selected: null }
       break
-    case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEM_RATINGS+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_MENU_ITEM_RATINGS+"_FULFILLED":
       newState.menuItemRating = { fetching: false, list: action.payload, selected: null }
       break
-    case DatabaseActions.ACTIONS.FETCH_MENU_ITEM_RATING+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_MENU_ITEM_RATING+"_FULFILLED":
       newState.menuItemRating = { ...newState.menuItemRating, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.FETCH_ALL_RATERS+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_RATERS+"_FULFILLED":
       newState.rater = { fetching: false, list: action.payload, selected: null }
       break
-    case DatabaseActions.ACTIONS.FETCH_RATER+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_RATER+"_FULFILLED":
       newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.FETCH_ALL_RATING_REVIEWS+"_RESOLVED":
+    case DatabaseActions.ACTIONS.FETCH_ALL_RATING_REVIEWS+"_FULFILLED":
       newState.ratingReviews = { fetching: true, list: [] }
       break
 
@@ -103,20 +103,20 @@ export default (state, action) => {
     case DatabaseActions.ACTIONS.UPDATE_LOCAITON+"_PENDING":
       break
 
-    case DatabaseActions.ACTIONS.UPDATE_RESTAURANT+"_RESOLVED":
+    case DatabaseActions.ACTIONS.UPDATE_RESTAURANT+"_FULFILLED":
       newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.UPDATE_MENU_ITEM+"_RESOLVED":
+    case DatabaseActions.ACTIONS.UPDATE_MENU_ITEM+"_FULFILLED":
       newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.UPDATE_RATING+"_RESOLVED":
+    case DatabaseActions.ACTIONS.UPDATE_RATING+"_FULFILLED":
       break
-    case DatabaseActions.ACTIONS.UPDATE_MENU_ITEM_RATING+"_RESOLVED":
+    case DatabaseActions.ACTIONS.UPDATE_MENU_ITEM_RATING+"_FULFILLED":
       break
-    case DatabaseActions.ACTIONS.UPDATE_RATER+"_RESOLVED":
+    case DatabaseActions.ACTIONS.UPDATE_RATER+"_FULFILLED":
       newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.UPDATE_LOCAITON+"_RESOLVED":
+    case DatabaseActions.ACTIONS.UPDATE_LOCAITON+"_FULFILLED":
       break
 
     case DatabaseActions.ACTIONS.ADD_RESTAURANT+"_PENDING":
@@ -135,20 +135,20 @@ export default (state, action) => {
     case DatabaseActions.ACTIONS.ADD_LOCAITON+"_PENDING":
       break
 
-    case DatabaseActions.ACTIONS.ADD_RESTAURANT+"_RESOLVED":
+    case DatabaseActions.ACTIONS.ADD_RESTAURANT+"_FULFILLED":
       newState.restaurant = { ...newState.restaurant, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.ADD_MENU_ITEM+"_RESOLVED":
+    case DatabaseActions.ACTIONS.ADD_MENU_ITEM+"_FULFILLED":
       newState.menuItem = { ...newState.menuItem, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.ADD_RATING+"_RESOLVED":
+    case DatabaseActions.ACTIONS.ADD_RATING+"_FULFILLED":
       break
-    case DatabaseActions.ACTIONS.ADD_MENU_ITEM_RATING+"_RESOLVED":
+    case DatabaseActions.ACTIONS.ADD_MENU_ITEM_RATING+"_FULFILLED":
       break
-    case DatabaseActions.ACTIONS.ADD_RATER+"_RESOLVED":
+    case DatabaseActions.ACTIONS.ADD_RATER+"_FULFILLED":
       newState.rater = { ...newState.rater, fetching: false, selected: action.payload }
       break
-    case DatabaseActions.ACTIONS.ADD_LOCAITON+"_RESOLVED":
+    case DatabaseActions.ACTIONS.ADD_LOCAITON+"_FULFILLED":
       break
 
     case ItemsActions.ACTIONS.SET_RESTAURANT:

@@ -44,44 +44,35 @@ export default {
   ACTIONS: ACTION_TYPES,
 
   fetchAllRestaurants: (store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_ALL_RESTAURANTS + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS + '_RESOLVED', payload: axios.get("/RestaurantAPI/rest/restaurant/get")}
+    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS, payload: axios.get("/RestaurantAPI/rest/restaurant/get")}
   },
 
   fetchRestaurant: (id, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_RESTAURANT + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_RESTAURANT + '_RESOLVED', payload: Database.fetchRestaurant(id) }
+    return { type: ACTION_TYPES.FETCH_RESTAURANT, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+id)}
   },
 
   fetchAllRestaurantsInCategory: (category, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_ALL_RESTAURANTS_IN_CATEGORY + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS_IN_CATEGORY + '_RESOLVED', payload: axios.get("/RestaurantAPI/rest/category/get/"+category+"/restaurant") }
+    return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS_IN_CATEGORY, payload: axios.get("/RestaurantAPI/rest/category/get/"+category+"/restaurant") }
   },
 
   fetchAllRatings: (restaurantID, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_ALL_RATINGS + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_ALL_RATINGS + '_RESOLVED', payload: Database.fetchAllRatings(restaurantID) }
+    return { type: ACTION_TYPES.FETCH_ALL_RATINGS, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating") }
   },
 
   fetchRating: (restaurantID, userID, date, id, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_RATING + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_RATING + '_RESOLVED', payload: Database.fetchRating(restaurantID, userID, date, id) }
+    return { type: ACTION_TYPES.FETCH_RATING, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating"+userID+"/"+date) }
   },
 
   fetchAllMenuItems: (restaurantID, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS + '_RESOLVED', payload: Database.fetchAllMenuItems(restaurantID) }
+    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem") }
   },
 
   fetchMenuItem: (restaurantID, id, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_MENU_ITEM + '_PENDING' })
-    return { type: ACTION_TYPES.FETCH_MENU_ITEM + '_RESOLVED', payload: Database.fetchMenuItem(restaurantID, id) }
+    return { type: ACTION_TYPES.FETCH_MENU_ITEM, payload: axios.get("/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+id) }
   },
 
   fetchAllMenuItemsInCategory: (category, store) => {
-    store.dispatch({ type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS_IN_CATEGORY + '_PENDING' })
-    const a = { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS_IN_CATEGORY + '_RESOLVED', payload: Database.fetchAllMenuItemsInCategory(category) }
-    return a
+    return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS_IN_CATEGORY + '_RESOLVED', payload: axios.get("/RestaurantAPI/rest/category/get/"+category+"/menuItem") }
   },
 
   fetchAllMenuItemRatings: (restaurantID, menuItemID, store) => {
