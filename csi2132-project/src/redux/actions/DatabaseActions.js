@@ -86,7 +86,7 @@ export default {
   },
 
   fetchAllRaters: (store) => {
-    return { type: ACTION_TYPES.FETCH_ALL_RATERS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/rater/get" }
+    return { type: ACTION_TYPES.FETCH_ALL_RATERS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/rater/get") }
   },
 
   fetchRater: (id, store) => {
