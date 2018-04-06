@@ -45,7 +45,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get", "/RestaurantAPI/rest/restaurant/get");
         
         connection = db.getConnection();
 
@@ -141,7 +141,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>","/RestaurantAPI/rest/restaurant/get/"+restaurant_id);
         
         connection = db.getConnection();
         JSONObject json = new JSONObject();
@@ -232,7 +232,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/menuItem", "/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/menuItem");
         
         JSONObject json = new JSONObject();
         JSONArray jArray = new JSONArray();
@@ -280,7 +280,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/menuItem/<mid>","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/menuItem/"+item_id);
         
         connection = db.getConnection();
         JSONObject json = new JSONObject();
@@ -326,7 +326,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/menuItemType","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/menuItemType");
         
         connection = db.getConnection();
 
@@ -365,7 +365,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/menuItemCategories","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/menuItemCategories");
         
         connection = db.getConnection();
 
@@ -379,11 +379,11 @@ public class Restaurant {
             {
             	jArray.add(rs.getString("category"));
             }
-            json.put("types", jArray);
+            json.put("categories", jArray);
             rs.close();
             st.close();
             }catch(Exception e){
-                System.out.println("Cant read from restaurant table:" + e);
+                System.out.println("Cant read from menuItem table:" + e);
             }      
         	
         	String returnJson = json.toString();
@@ -404,7 +404,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/rating","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/rating");
         
         JSONObject json = new JSONObject();
         JSONArray jArray = new JSONArray();
@@ -452,7 +452,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/menuItem/<mid>/rating","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/menuItem/"+item_id+"/rating");
         
         connection = db.getConnection();
         JSONObject json = new JSONObject();
@@ -499,7 +499,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/rating","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/rating");
         
         JSONObject json = new JSONObject();
         JSONArray jArray = new JSONArray();
@@ -544,16 +544,18 @@ public class Restaurant {
 	@Path("/ADD")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postRestaurant(String stringJsonRestaurant) {
+    public String postRestaurant(String stringJsonRestaurant) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRestaurant = null;
     	String name ="";
+    	String type ="";
     	String URL ="";
 		try {
 			jsonRestaurant = (JSONObject) parser.parse(stringJsonRestaurant);
-			name = (String) jsonRestaurant.get("name");
-	    	URL = (String) jsonRestaurant.get("url");
+			name = (String) jsonRestaurant.get("Name");
+			type = (String) jsonRestaurant.get("Type");
+	    	URL = (String) jsonRestaurant.get("Url");
 		} catch (ParseException e1) {
 			System.out.println("Could not read restaurant json. " + e1);
 		}
@@ -561,13 +563,13 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/ADD + restaurantJSON", "/RestaurantAPI/rest/restaurant/ADD + "+stringJsonRestaurant);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO restaurant(name, url) VALUES ('"+name+"', '"+URL+"')");
+            rs  = st.executeQuery("INSERT INTO restaurant(name, type, url) VALUES ('"+name+"', '"+type+"', '"+URL+"')");
            
             rs.close();
             st.close();
@@ -577,6 +579,15 @@ public class Restaurant {
         
         	db.closeConnection();
        
+        	JSONObject json = new JSONObject();
+        	json.put("Name",name);
+        	json.put("Type",type);
+        	json.put("URL",URL);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
+        	
     }
     
     //-------------------------------------------------------------------------------------------
@@ -586,18 +597,20 @@ public class Restaurant {
 	@Path("/UPDATE")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putRestaurant(String stringJsonRestaurant) {
+    public String putRestaurant(String stringJsonRestaurant) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRestaurant = null;
     	String restaurant_id ="";
     	String name ="";
+    	String type ="";
     	String URL ="";
 		try {
 			jsonRestaurant = (JSONObject) parser.parse(stringJsonRestaurant);
-			restaurant_id = (String) jsonRestaurant.get("restaurantID");
-			name = (String) jsonRestaurant.get("name");
-	    	URL = (String) jsonRestaurant.get("url");
+			restaurant_id = (String) jsonRestaurant.get("RestaurantID");
+			name = (String) jsonRestaurant.get("Name");
+			type = (String) jsonRestaurant.get("Type");
+	    	URL = (String) jsonRestaurant.get("URL");
 		} catch (ParseException e1) {
 			System.out.println("Could not read restaurant json. " + e1);
 		}
@@ -605,13 +618,13 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/UPDATE + restaurantJSON", "/RestaurantAPI/rest/restaurant/UPDATE + "+ stringJsonRestaurant);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE restaurant set name ="+ name +", url ="+ URL +" WHERE restaurantID="+restaurant_id);
+            rs  = st.executeQuery("UPDATE restaurant set name ="+ name +", type ="+ type +", url ="+ URL +" WHERE restaurantID="+restaurant_id);
            
             rs.close();
             st.close();
@@ -620,6 +633,16 @@ public class Restaurant {
             }
         
         	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("RestaurantID",restaurant_id);
+        	json.put("Name",name);
+        	json.put("Type",type);
+        	json.put("URL",URL);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
@@ -633,7 +656,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/restaurant/DELETE/<rid>","/RestaurantAPI/rest/restaurant/DELETE/"+restaurant_id);
         
         connection = db.getConnection();
 

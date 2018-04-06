@@ -33,7 +33,9 @@ public class Rater {
     	    	
     }
     
-   
+    //-------------------------------------------------------------------------------------------
+    ///RestaurantAPI/rest/rater/get
+    //-------------------------------------------------------------------------------------------
 	@GET
     @Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -42,7 +44,7 @@ public class Rater {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rater/get","/RestaurantAPI/rest/rater/get");
 
         connection = db.getConnection();
 
@@ -103,6 +105,9 @@ public class Rater {
             return returnJson;
     }
 	
+    //-------------------------------------------------------------------------------------------
+    ///RestaurantAPI/rest/rater/get/<uid>
+    //-------------------------------------------------------------------------------------------
 	@GET
 	@Path("/get/{uid}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -111,7 +116,7 @@ public class Rater {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rater/get/<uid>","/RestaurantAPI/rest/rater/get/"+user_id);
         
         connection = db.getConnection();
         JSONObject json = new JSONObject();
@@ -122,7 +127,6 @@ public class Rater {
             while (rs.next())
             {
             	if(rs.getString("userID").equals(user_id)){
-                    System.out.println("UserID found::" + user_id);
 
                 json.put("UserID", user_id);
             	json.put("Email", rs.getString("email"));
@@ -166,24 +170,90 @@ public class Rater {
         	String returnJson = json.toString();
         
         	db.closeConnection();
-            System.out.println("returnJson: " + returnJson);
 
             return returnJson;
     }
 	
+    //-------------------------------------------------------------------------------------------
+    ///RestaurantAPI/rest/rater/Login
+    //-------------------------------------------------------------------------------------------
+    @POST
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String loginRater(String stringJsonLogin) {
+    	
+    	JSONParser parser = new JSONParser();
+    	JSONObject jsonRater = null;
+    	String username = "";
+    	String password ="";
+    	Boolean loginSuccess=false;
+
+
+		try {
+			jsonRater = (JSONObject) parser.parse(stringJsonLogin);
+	    	username = (String) jsonRater.get("username");
+	    	password = (String) jsonRater.get("password");
+		} catch (ParseException e1) {
+			System.out.println("Could not read login json. " + e1);
+		}
+    	    	
+    	//Need to figure out how to not make a million database connections
+    	DataAccess db;
+        db= new DataAccess();
+        db.openConnection("/RestaurantAPI/rest/rater/Login+ loginJson","/RestaurantAPI/rest/rater/Login + "+stringJsonLogin);
+        
+        connection = db.getConnection();
+
+        try{
+            st = connection.createStatement();
+            rs  = st.executeQuery("SELECT * FROM project.rater");
+           
+            while (rs.next())
+            {
+            	if(rs.getString("username").equals(username)){
+            		
+            		if(rs.getString("password").equals(password)){
+            			
+            			loginSuccess=true;
+            		}
+            		else{
+            			loginSuccess=false;
+            		}
+            		
+            	}
+            	
+            }
+            
+            
+            rs.close();
+            st.close();
+            }catch(Exception e){
+                System.out.println("Cant read from rater table: " + e);
+            }
+        
+        	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("loginSuccess", loginSuccess.toString());
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
+       
+    }
 
     //-------------------------------------------------------------------------------------------
-    ///RestaurantAPI/rest/rating/ADD
+    ///RestaurantAPI/rest/rater/ADD
     //-------------------------------------------------------------------------------------------
     @POST
 	@Path("/ADD")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postRater(String stringJsonRater) {
+    public String postRater(String stringJsonRater) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRater = null;
-    	String user_id ="";
     	String email ="";
     	String join_date = "";
     	String type = "";
@@ -205,13 +275,13 @@ public class Rater {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rater/ADD + raterJson","/RestaurantAPI/rest/rater/ADD + "+stringJsonRater);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO rater(email, joinDate, type, username, password) VALUES ('"+email+"', '"+join_date+"', '"+type+"', '"+username+"', '"+password+"')");
+            rs  = st.executeQuery("INSERT INTO rater(email, join_date, type, username, password) VALUES ('"+email+"', '"+join_date+"', '"+type+"', '"+username+"', '"+password+"')");
            
             rs.close();
             st.close();
@@ -220,6 +290,17 @@ public class Rater {
             }
         
         	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("email", email);
+        	json.put("join_date", join_date);
+        	json.put("type", type);
+        	json.put("username", username);
+        	json.put("password", password);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
@@ -230,7 +311,7 @@ public class Rater {
 	@Path("/UPDATE")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putRater(String stringJsonRater) {
+    public String putRater(String stringJsonRater) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRater = null;
@@ -257,7 +338,7 @@ public class Rater {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rater/UPDATE + raterJson", "/RestaurantAPI/rest/rater/UPDATE + "+ stringJsonRater);
         
         connection = db.getConnection();
 
@@ -272,6 +353,17 @@ public class Rater {
             }
         
         	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("email", email);
+        	json.put("join_date", join_date);
+        	json.put("type", type);
+        	json.put("username", username);
+        	json.put("password", password);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
@@ -285,7 +377,7 @@ public class Rater {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rater/DELETE/<uid>","/RestaurantAPI/rest/rater/DELETE/"+user_id);
         
         connection = db.getConnection();
 

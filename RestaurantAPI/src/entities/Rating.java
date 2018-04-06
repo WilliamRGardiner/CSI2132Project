@@ -36,7 +36,7 @@ public class Rating {
 	@Path("/ADD")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postRating(String stringJsonRating) {
+    public String postRating(String stringJsonRating) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRating = null;
@@ -50,13 +50,13 @@ public class Rating {
 
 		try {
 			jsonRating = (JSONObject) parser.parse(stringJsonRating);
-	    	user_id = (String) jsonRating.get("userID");
-	    	date = (String) jsonRating.get("date");
-	    	food = (int) jsonRating.get("food");
-	    	mood = (int) jsonRating.get("mood");
-	    	staff = (int) jsonRating.get("staff");
-	    	comments = (String) jsonRating.get("comments");
-	    	restaurant_id = (String) jsonRating.get("restaurantID");
+	    	user_id = (String) jsonRating.get("UserID");
+	    	date = (String) jsonRating.get("Date");
+	    	food = (int) jsonRating.get("Food");
+	    	mood = (int) jsonRating.get("Mood");
+	    	staff = (int) jsonRating.get("Staff");
+	    	comments = (String) jsonRating.get("Comment");
+	    	restaurant_id = (String) jsonRating.get("RestaurantID");
 		} catch (ParseException e1) {
 			System.out.println("Could not read rating json. " + e1);
 		}
@@ -64,7 +64,7 @@ public class Rating {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rating/ADD + ratingJson", "/RestaurantAPI/rest/rating/ADD + "+stringJsonRating);
         
         connection = db.getConnection();
 
@@ -79,6 +79,19 @@ public class Rating {
             }
         
         	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("UserID", user_id);
+        	json.put("Date", date);
+        	json.put("Food", food);
+        	json.put("Mood", mood);
+        	json.put("Staff", staff);
+        	json.put("Comment", comments);
+        	json.put("RestaurantID", restaurant_id);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
@@ -89,7 +102,7 @@ public class Rating {
 	@Path("/UPDATE")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putRating(String stringJsonRating) {
+    public String putRating(String stringJsonRating) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRating = null;
@@ -103,13 +116,13 @@ public class Rating {
 
 		try {
 			jsonRating = (JSONObject) parser.parse(stringJsonRating);
-	    	user_id = (String) jsonRating.get("userID");
-	    	date = (String) jsonRating.get("date");
-	    	food = (int) jsonRating.get("food");
-	    	mood = (int) jsonRating.get("mood");
-	    	staff = (int) jsonRating.get("staff");
-	    	comments = (String) jsonRating.get("comments");
-	    	restaurant_id = (String) jsonRating.get("restaurantID");
+	    	user_id = (String) jsonRating.get("UserID");
+	    	date = (String) jsonRating.get("Date");
+	    	food = (int) jsonRating.get("Food");
+	    	mood = (int) jsonRating.get("Mood");
+	    	staff = (int) jsonRating.get("Staff");
+	    	comments = (String) jsonRating.get("Comment");
+	    	restaurant_id = (String) jsonRating.get("RestaurantID");
 		} catch (ParseException e1) {
 			System.out.println("Could not read rating json. " + e1);
 		}
@@ -117,13 +130,13 @@ public class Rating {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rating/UPDATE + ratingJson", "/RestaurantAPI/rest/rating/UPDATE + "+stringJsonRating);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE rating set food ="+ food +", mood ="+ mood+", staff ="+ staff+", comments ="+ comments+", restaurant_id ="+ restaurant_id +" WHERE userID="+user_id+" AND date="+date);
+            rs  = st.executeQuery("UPDATE rating set food ="+ food +", mood ="+ mood+", staff ="+ staff+", comments ="+ comments+", restaurantID ="+ restaurant_id +" WHERE userID="+user_id+" AND date="+date);
            
             rs.close();
             st.close();
@@ -132,11 +145,24 @@ public class Rating {
             }
         
         	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("UserID", user_id);
+        	json.put("Date", date);
+        	json.put("Food", food);
+        	json.put("Mood", mood);
+        	json.put("Staff", staff);
+        	json.put("Comment", comments);
+        	json.put("RestaurantID", restaurant_id);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
     //-------------------------------------------------------------------------------------------
-    ///RestaurantAPI/rest/menuItem/DELETE/<aid>/<date>
+    ///RestaurantAPI/rest/rating/DELETE/<uid>/<date>
     //-------------------------------------------------------------------------------------------
     @DELETE
 	@Path("/DELETE/{uid}/{date}")
@@ -145,7 +171,7 @@ public class Rating {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/rating/DELETE/<uid>/<date>", "/RestaurantAPI/rest/rating/DELETE/"+user_id+"/"+date);
         
         connection = db.getConnection();
 

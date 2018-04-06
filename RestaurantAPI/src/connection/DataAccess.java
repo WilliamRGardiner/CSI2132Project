@@ -19,7 +19,7 @@ public class DataAccess
     }    
     
 
-    public void openConnection() {
+    public void openConnection(String queryDef, String queryAct) {
         try
         {
             Password password = new Password();
@@ -27,7 +27,9 @@ public class DataAccess
             Class.forName("org.postgresql.Driver");
             //connection = DriverManager.getConnection("jdbc:postgresql://web0.site.uottawa.ca:15432/svale054","svale054",password.getPass());
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=project", "postgres",password.getPass());
-            System.out.println("Connection Established");
+            System.out.println("Connection Established for query:");
+            System.out.println(queryDef);
+            System.out.println(queryAct);
         }catch(Exception e){
             System.out.println("No connection established: "+e.toString());
         }

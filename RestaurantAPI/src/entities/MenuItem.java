@@ -36,7 +36,7 @@ public class MenuItem {
 	@Path("/ADD")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postMenuItem(String stringJsonMenuItem) {
+    public String postMenuItem(String stringJsonMenuItem) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonMenuItem = null;
@@ -49,12 +49,12 @@ public class MenuItem {
 
 		try {
 			jsonMenuItem = (JSONObject) parser.parse(stringJsonMenuItem);
-	    	name = (String) jsonMenuItem.get("name");
-	    	type = (String) jsonMenuItem.get("type");
-	    	category = (String) jsonMenuItem.get("category");
-	    	description = (String) jsonMenuItem.get("description");
-	    	price = (String) jsonMenuItem.get("price");
-	    	restaurant_id = (String) jsonMenuItem.get("restaurant_id");
+	    	name = (String) jsonMenuItem.get("Name");
+	    	type = (String) jsonMenuItem.get("Type");
+	    	category = (String) jsonMenuItem.get("Category");
+	    	description = (String) jsonMenuItem.get("Description");
+	    	price = (String) jsonMenuItem.get("Price");
+	    	restaurant_id = (String) jsonMenuItem.get("RestaurantID");
 		} catch (ParseException e1) {
 			System.out.println("Could not read menuItem json. " + e1);
 		}
@@ -62,13 +62,13 @@ public class MenuItem {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/menuItem/ADD + meuItemJson", "/RestaurantAPI/rest/menuItem/ADD + "+stringJsonMenuItem);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO menuItem(name, type, category, description, price, restaurant_id) VALUES ('"+name+"', '"+type+"', '"+category+"', '"+description+"', '"+price+"', '"+restaurant_id+"')");
+            rs  = st.executeQuery("INSERT INTO menuItem(name, type, category, description, price, restaurantID) VALUES ('"+name+"', '"+type+"', '"+category+"', '"+description+"', '"+price+"', '"+restaurant_id+"')");
            
             rs.close();
             st.close();
@@ -77,6 +77,18 @@ public class MenuItem {
             }
         
         	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("Name", name);
+        	json.put("Type", type);
+        	json.put("Category", category);
+        	json.put("Description", description);
+        	json.put("Price", price);
+        	json.put("RestaurantID", restaurant_id);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
@@ -87,7 +99,7 @@ public class MenuItem {
 	@Path("/UPDATE")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putMenuItem(String stringJsonMenuItem) {
+    public String putMenuItem(String stringJsonMenuItem) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonMenuItem = null;
@@ -101,13 +113,13 @@ public class MenuItem {
 
 		try {
 			jsonMenuItem = (JSONObject) parser.parse(stringJsonMenuItem);
-	    	item_id = (String) jsonMenuItem.get("item_id");
-	    	name = (String) jsonMenuItem.get("name");
-	    	type = (String) jsonMenuItem.get("type");
-	    	category = (String) jsonMenuItem.get("category");
-	    	description = (String) jsonMenuItem.get("description");
-	    	price = (String) jsonMenuItem.get("price");
-	    	restaurant_id = (String) jsonMenuItem.get("restaurant_id");
+	    	item_id = (String) jsonMenuItem.get("ItemID");
+	    	name = (String) jsonMenuItem.get("Name");
+	    	type = (String) jsonMenuItem.get("Type");
+	    	category = (String) jsonMenuItem.get("Category");
+	    	description = (String) jsonMenuItem.get("Description");
+	    	price = (String) jsonMenuItem.get("Price");
+	    	restaurant_id = (String) jsonMenuItem.get("RestaurantID");
 		} catch (ParseException e1) {
 			System.out.println("Could not read menuItem json. " + e1);
 		}
@@ -115,13 +127,13 @@ public class MenuItem {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/menuItem/UPDATE + menuItemJson", "/RestaurantAPI/rest/menuItem/UPDATE + "+stringJsonMenuItem);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE restaurant set name ="+ name +", type ="+ type+", category ="+ category+", description ="+ description+", price ="+ price +", restaurant_id ="+ restaurant_id +" WHERE item_id="+item_id);
+            rs  = st.executeQuery("UPDATE restaurant set name ="+ name +", type ="+ type+", category ="+ category+", description ="+ description+", price ="+ price +", restaurantID ="+ restaurant_id +" WHERE itemID="+item_id);
            
             rs.close();
             st.close();
@@ -130,6 +142,20 @@ public class MenuItem {
             }
         
         	db.closeConnection();
+        	
+
+        	JSONObject json = new JSONObject();
+        	json.put("ItemID", item_id);
+        	json.put("Name", name);
+        	json.put("Type", type);
+        	json.put("Category", category);
+        	json.put("Description", description);
+        	json.put("Price", price);
+        	json.put("RestaurantID", restaurant_id);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
@@ -143,13 +169,13 @@ public class MenuItem {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/menuItem/DELETE/<mid>", "/RestaurantAPI/rest/menuItem/DELETE/"+item_id);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("DELETE FROM project.menuItem WHERE item_id="+item_id);
+            rs  = st.executeQuery("DELETE FROM project.menuItem WHERE itemID="+item_id);
             rs.close();
             st.close();
             }catch(Exception e){

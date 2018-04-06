@@ -27,17 +27,17 @@ public class Category {
        
     
     //-------------------------------------------------------------------------------------------
-    ///RestaurantAPI/rest/category/get/{category}/restaurant
+    ///RestaurantAPI/rest/category/get/{type}/restaurant
     //-------------------------------------------------------------------------------------------
     @GET
-	@Path("/get/{category}/restaurant")
+	@Path("/get/{type}/restaurant")
 	@Produces(MediaType.APPLICATION_JSON)
-    public String getrestaurant(@PathParam("category") String category) {
+    public String getrestaurant(@PathParam("type") String type) {
     	
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/category/get/{type}/restaurant","/RestaurantAPI/rest/category/get/"+type+"/restaurant");
         
         connection = db.getConnection();
 
@@ -51,7 +51,7 @@ public class Category {
                  {
                  
             		 
-            		if(rs.getString("type").replaceAll("\\s", "").toLowerCase().equals(category.replaceAll("\\s+","").toLowerCase())){ 
+            		if(rs.getString("type").replaceAll("\\s", "").toLowerCase().equals(type.replaceAll("\\s+","").toLowerCase())){ 
             			JSONObject rJson = new JSONObject();
             			rJson.put("RestaurantID", rs.getString("restaurantID"));
             			rJson.put("Name",rs.getString("name"));
@@ -113,7 +113,7 @@ public class Category {
                 		jArray.add(rJson);
                  	
             		}
-            		else if(("any").equals(category.replaceAll("\\s+","").toLowerCase())){
+            		else if(("any").equals(type.replaceAll("\\s+","").toLowerCase())){
             			JSONObject rJson = new JSONObject();
             			rJson.put("RestaurantID", rs.getString("restaurantID"));
             			rJson.put("Name",rs.getString("name"));
@@ -203,7 +203,7 @@ public class Category {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/category/get/restaurantType","/RestaurantAPI/rest/category/get/restaurantType");
         
         connection = db.getConnection();
 
@@ -242,7 +242,7 @@ public class Category {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/category/get/menuItemType","/RestaurantAPI/rest/category/get/menuItemType");
         
         connection = db.getConnection();
 
@@ -281,7 +281,7 @@ public class Category {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/category/get/menuItemCategory","/RestaurantAPI/rest/category/get/menuItemCategory");
         
         connection = db.getConnection();
 
@@ -310,17 +310,17 @@ public class Category {
     }
     
     //-------------------------------------------------------------------------------------------
-    ///RestaurantAPI/rest/category/get/<type>/menuItem
+    ///RestaurantAPI/rest/category/get/<category>/menuItem
     //-------------------------------------------------------------------------------------------
-    @GET
+   /* @GET
 	@Path("/get/{category}/menuItem")
 	@Produces(MediaType.APPLICATION_JSON)
-    public String getRestaurantMenuItems(@PathParam("category") String category) {
+    public String getRestaurantMenuItemsCategories(@PathParam("category") String category) {
     	
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/category/get/<category>/menuItem","/RestaurantAPI/rest/category/get/"+category+"/menuItem");
         
         JSONObject json = new JSONObject();
         JSONArray jArray = new JSONArray();
@@ -345,6 +345,68 @@ public class Category {
                 	jArray.add(rJson);	
             	}
             	else if(("any").equals(category.replaceAll("\\s+","").toLowerCase())){
+            		JSONObject rJson = new JSONObject();
+            		rJson.put("ItemID", rs.getString("itemID"));
+            		rJson.put("Name", rs.getString("name"));
+                	rJson.put("Type", rs.getString("type"));
+                	rJson.put("Category", rs.getString("category"));
+                	rJson.put("Description", rs.getString("description"));
+                	rJson.put("Price", rs.getString("price"));
+                	rJson.put("RestaurantID", rs.getString("restaurantID"));
+                	
+                	jArray.add(rJson);	
+            	}
+            }
+            json.put("menuitems", jArray);
+            rs.close();
+            st.close();
+            }catch(Exception e){
+                System.out.println("Cant read from menuitem table:" + e);
+            }
+                	
+        	String returnJson = json.toString();
+        
+        	db.closeConnection();
+        
+            return returnJson;
+    }*/
+    
+    //-------------------------------------------------------------------------------------------
+    ///RestaurantAPI/rest/category/get/<type>/menuItem
+    //-------------------------------------------------------------------------------------------
+    @GET
+	@Path("/get/{type}/menuItem")
+	@Produces(MediaType.APPLICATION_JSON)
+    public String getRestaurantMenuItemsTypes(@PathParam("type") String type) {
+    	
+    	//Need to figure out how to not make a million database connections
+    	DataAccess db;
+        db= new DataAccess();
+        db.openConnection("/RestaurantAPI/rest/category/get/<type>/menuItem", "/RestaurantAPI/rest/category/get/"+type+"/menuItem");
+        
+        JSONObject json = new JSONObject();
+        JSONArray jArray = new JSONArray();
+
+        connection = db.getConnection();
+
+        try{
+            st = connection.createStatement();
+            rs  = st.executeQuery("SELECT * FROM project.menuitem");
+            while (rs.next())
+            {
+            	if(rs.getString("type").replaceAll("\\s", "").toLowerCase().equals(type.replaceAll("\\s+","").toLowerCase())){
+            		JSONObject rJson = new JSONObject();
+            		rJson.put("ItemID", rs.getString("itemID"));
+            		rJson.put("Name", rs.getString("name"));
+                	rJson.put("Type", rs.getString("type"));
+                	rJson.put("Category", rs.getString("category"));
+                	rJson.put("Description", rs.getString("description"));
+                	rJson.put("Price", rs.getString("price"));
+                	rJson.put("RestaurantID", rs.getString("restaurantID"));
+                	
+                	jArray.add(rJson);	
+            	}
+            	else if(("any").equals(type.replaceAll("\\s+","").toLowerCase())){
             		JSONObject rJson = new JSONObject();
             		rJson.put("ItemID", rs.getString("itemID"));
             		rJson.put("Name", rs.getString("name"));

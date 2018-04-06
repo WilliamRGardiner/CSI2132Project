@@ -36,7 +36,7 @@ public class RatingItem {
 	@Path("/ADD")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postRatingItem(String stringJsonRatingItem) {
+    public String postRatingItem(String stringJsonRatingItem) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRatingItem = null;
@@ -48,11 +48,11 @@ public class RatingItem {
 
 		try {
 			jsonRatingItem = (JSONObject) parser.parse(stringJsonRatingItem);
-	    	user_id = (String) jsonRatingItem.get("user_id");
-	    	date = (String) jsonRatingItem.get("date");
-	    	item_id = (String) jsonRatingItem.get("item_id");
-	    	rating = (int) jsonRatingItem.get("rating");
-	    	comment = (String) jsonRatingItem.get("comment");
+	    	user_id = (String) jsonRatingItem.get("UserID");
+	    	date = (String) jsonRatingItem.get("Date");
+	    	item_id = (String) jsonRatingItem.get("ItemID");
+	    	rating = (int) jsonRatingItem.get("Rating");
+	    	comment = (String) jsonRatingItem.get("Comment");
 		} catch (ParseException e1) {
 			System.out.println("Could not read ratingItem json. " + e1);
 		}
@@ -60,13 +60,13 @@ public class RatingItem {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/ratingItem/ADD + ratingItemJson","/RestaurantAPI/rest/ratingItem/ADD + "+stringJsonRatingItem);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO ratingItem(user_id, date, item_id, rating, comment) VALUES ('"+user_id+"', '"+date+"', '"+item_id+"', "+rating+", '"+comment+"')");
+            rs  = st.executeQuery("INSERT INTO ratingItem(userID, date, itemID, rating, comments) VALUES ('"+user_id+"', '"+date+"', '"+item_id+"', "+rating+", '"+comment+"')");
            
             rs.close();
             st.close();
@@ -75,6 +75,17 @@ public class RatingItem {
             }
         
         	db.closeConnection();
+        	
+        	JSONObject json = new JSONObject();
+        	json.put("UserID", user_id);
+        	json.put("Date", date);
+        	json.put("ItemID", item_id);
+        	json.put("Rating", rating);
+        	json.put("Comment", comment);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
        
     }
     
@@ -85,7 +96,7 @@ public class RatingItem {
 	@Path("/UPDATE")
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putRatingItem(String stringJsonRatingItem) {
+    public String putRatingItem(String stringJsonRatingItem) {
     	
     	JSONParser parser = new JSONParser();
     	JSONObject jsonRatingItem = null;
@@ -97,11 +108,11 @@ public class RatingItem {
 
 		try {
 			jsonRatingItem = (JSONObject) parser.parse(stringJsonRatingItem);
-	    	user_id = (String) jsonRatingItem.get("user_id");
-	    	date = (String) jsonRatingItem.get("date");
-	    	item_id = (String) jsonRatingItem.get("item_id");
-	    	rating = (int) jsonRatingItem.get("rating");
-	    	comment = (String) jsonRatingItem.get("comment");
+	    	user_id = (String) jsonRatingItem.get("UserID");
+	    	date = (String) jsonRatingItem.get("Date");
+	    	item_id = (String) jsonRatingItem.get("ItemID");
+	    	rating = (int) jsonRatingItem.get("Rating");
+	    	comment = (String) jsonRatingItem.get("Comment");
 		} catch (ParseException e1) {
 			System.out.println("Could not read ratingItem json. " + e1);
 		}
@@ -109,13 +120,13 @@ public class RatingItem {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/ratingItem/UPDATE + ratingItemJson", "/RestaurantAPI/rest/ratingItem/UPDATE + "+stringJsonRatingItem);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE ratingItem set rating ="+ rating +", comment ="+ comment+" WHERE user_id="+user_id+" AND date="+date+" AND item_id="+item_id);
+            rs  = st.executeQuery("UPDATE ratingItem set rating ="+ rating +", comments ="+ comment+" WHERE userID="+user_id+" AND date="+date+" AND itemID="+item_id);
            
             rs.close();
             st.close();
@@ -125,10 +136,20 @@ public class RatingItem {
         
         	db.closeConnection();
        
+        	JSONObject json = new JSONObject();
+        	json.put("UserID", user_id);
+        	json.put("Date", date);
+        	json.put("ItemID", item_id);
+        	json.put("Rating", rating);
+        	json.put("Comment", comment);
+        	
+        	String returnJson = json.toString();
+        	
+        	return returnJson;
     }
     
     //-------------------------------------------------------------------------------------------
-    ///RestaurantAPI/rest/ratingItem/DELETE/<aid>/<date>
+    ///RestaurantAPI/rest/ratingItem/DELETE/<uid>/<date>/<aid>
     //-------------------------------------------------------------------------------------------
     @DELETE
 	@Path("/DELETE/{uid}/{date}/{aid}")
@@ -137,13 +158,13 @@ public class RatingItem {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection();
+        db.openConnection("/RestaurantAPI/rest/ratingItem/DELETE/<uid>/<date>/<aid>", "/RestaurantAPI/rest/ratingItem/DELETE/"+user_id+"/"+date+"/"+item_id);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("DELETE FROM project.ratingItem WHERE user_id="+user_id+" AND date="+date+" AND item_id="+item_id);
+            rs  = st.executeQuery("DELETE FROM project.ratingItem WHERE userID="+user_id+" AND date="+date+" AND itemID="+item_id);
             rs.close();
             st.close();
             }catch(Exception e){
