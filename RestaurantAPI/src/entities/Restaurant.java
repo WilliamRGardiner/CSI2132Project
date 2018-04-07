@@ -650,7 +650,7 @@ public class Restaurant {
     	String URL ="";
 		try {
 			jsonRestaurant = (JSONObject) parser.parse(stringJsonRestaurant);
-			restaurant_id = (String) jsonRestaurant.get("RestaurantID");
+			restaurant_id = (String) jsonRestaurant.get("RestaurantID").toString();
 			name = (String) jsonRestaurant.get("Name");
 			type = (String) jsonRestaurant.get("Type");
 	    	URL = (String) jsonRestaurant.get("URL");

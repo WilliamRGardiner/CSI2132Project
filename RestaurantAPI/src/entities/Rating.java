@@ -42,21 +42,21 @@ public class Rating {
     	JSONObject jsonRating = null;
     	String user_id ="";
     	String date ="";
-    	int food = 0;
-    	int mood = 0;
-    	int staff = 0;
+    	String food = "";
+    	String mood = "";
+    	String staff = "";
     	String comments ="";
     	String restaurant_id ="";
 
 		try {
 			jsonRating = (JSONObject) parser.parse(stringJsonRating);
-	    	user_id = (String) jsonRating.get("UserID");
+	    	user_id = (String) jsonRating.get("UserID").toString();
 	    	date = (String) jsonRating.get("Date");
-	    	food = (int) jsonRating.get("Food");
-	    	mood = (int) jsonRating.get("Mood");
-	    	staff = (int) jsonRating.get("Staff");
+	    	food = (String) jsonRating.get("Food").toString();
+	    	mood = (String) jsonRating.get("Mood").toString();
+	    	staff = (String) jsonRating.get("Staff").toString();
 	    	comments = (String) jsonRating.get("Comment");
-	    	restaurant_id = (String) jsonRating.get("RestaurantID");
+	    	restaurant_id = (String) jsonRating.get("RestaurantID").toString();
 		} catch (ParseException e1) {
 			System.out.println("Could not read rating json. " + e1);
 		}
@@ -108,21 +108,21 @@ public class Rating {
     	JSONObject jsonRating = null;
     	String user_id ="";
     	String date ="";
-    	int food = 0;
-    	int mood = 0;
-    	int staff = 0;
+    	String food = "";
+    	String mood = "";
+    	String staff = "";
     	String comments ="";
     	String restaurant_id ="";
 
 		try {
 			jsonRating = (JSONObject) parser.parse(stringJsonRating);
-	    	user_id = (String) jsonRating.get("UserID");
+	    	user_id = (String) jsonRating.get("UserID").toString();
 	    	date = (String) jsonRating.get("Date");
-	    	food = (int) jsonRating.get("Food");
-	    	mood = (int) jsonRating.get("Mood");
-	    	staff = (int) jsonRating.get("Staff");
+	    	food = (String) jsonRating.get("Food").toString();
+	    	mood = (String) jsonRating.get("Mood").toString();
+	    	staff = (String) jsonRating.get("Staff").toString();
 	    	comments = (String) jsonRating.get("Comment");
-	    	restaurant_id = (String) jsonRating.get("RestaurantID");
+	    	restaurant_id = (String) jsonRating.get("RestaurantID").toString();
 		} catch (ParseException e1) {
 			System.out.println("Could not read rating json. " + e1);
 		}

@@ -53,8 +53,8 @@ public class MenuItem {
 	    	type = (String) jsonMenuItem.get("Type");
 	    	category = (String) jsonMenuItem.get("Category");
 	    	description = (String) jsonMenuItem.get("Description");
-	    	price = (String) jsonMenuItem.get("Price");
-	    	restaurant_id = (String) jsonMenuItem.get("RestaurantID");
+	    	price = (String) jsonMenuItem.get("Price").toString();
+	    	restaurant_id = (String) jsonMenuItem.get("RestaurantID").toString();
 		} catch (ParseException e1) {
 			System.out.println("Could not read menuItem json. " + e1);
 		}
@@ -113,13 +113,13 @@ public class MenuItem {
 
 		try {
 			jsonMenuItem = (JSONObject) parser.parse(stringJsonMenuItem);
-	    	item_id = (String) jsonMenuItem.get("ItemID");
+	    	item_id = (String) jsonMenuItem.get("ItemID").toString();
 	    	name = (String) jsonMenuItem.get("Name");
 	    	type = (String) jsonMenuItem.get("Type");
 	    	category = (String) jsonMenuItem.get("Category");
 	    	description = (String) jsonMenuItem.get("Description");
-	    	price = (String) jsonMenuItem.get("Price");
-	    	restaurant_id = (String) jsonMenuItem.get("RestaurantID");
+	    	price = (String) jsonMenuItem.get("Price").toString();
+	    	restaurant_id = (String) jsonMenuItem.get("RestaurantID").toString();
 		} catch (ParseException e1) {
 			System.out.println("Could not read menuItem json. " + e1);
 		}

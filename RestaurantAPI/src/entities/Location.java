@@ -55,7 +55,7 @@ public class Location {
 	    	address = (String) jsonLocation.get("address");
 	    	hour_open = (String) jsonLocation.get("opening_time");
 	    	hour_close = (String) jsonLocation.get("closing_time");
-	    	restaurant_id = (String) jsonLocation.get("RestaurantID");
+	    	restaurant_id = (String) jsonLocation.get("RestaurantID").toString();
 		} catch (ParseException e1) {
 			System.out.println("Could not read location json. " + e1);
 		}
@@ -116,14 +116,14 @@ public class Location {
 
 		try {
 			jsonLocation = (JSONObject) parser.parse(stringJsonLocation);
-	    	location_id = (String) jsonLocation.get("location_id");
+	    	location_id = (String) jsonLocation.get("location_id").toString();
 	    	open_date = (String) jsonLocation.get("open_date");
 	    	manager_name = (String) jsonLocation.get("manager_name");
 	    	phone_number = (String) jsonLocation.get("phone_number");
 	    	address = (String) jsonLocation.get("address");
 	    	hour_open = (String) jsonLocation.get("hour_open");
 	    	hour_close = (String) jsonLocation.get("hour_close");
-	    	restaurant_id = (String) jsonLocation.get("restaurant_id");
+	    	restaurant_id = (String) jsonLocation.get("restaurant_id").toString();
 		} catch (ParseException e1) {
 			System.out.println("Could not read location json. " + e1);
 		}

@@ -43,15 +43,15 @@ public class RatingItem {
     	String user_id ="";
     	String date ="";
     	String item_id = "";
-    	int rating = 0;
+    	String rating = "";
     	String comment ="";
 
 		try {
 			jsonRatingItem = (JSONObject) parser.parse(stringJsonRatingItem);
-	    	user_id = (String) jsonRatingItem.get("UserID");
+	    	user_id = (String) jsonRatingItem.get("UserID").toString();
 	    	date = (String) jsonRatingItem.get("Date");
-	    	item_id = (String) jsonRatingItem.get("ItemID");
-	    	rating = (int) jsonRatingItem.get("Rating");
+	    	item_id = (String) jsonRatingItem.get("ItemID").toString();
+	    	rating = (String) jsonRatingItem.get("Rating").toString();
 	    	comment = (String) jsonRatingItem.get("Comment");
 		} catch (ParseException e1) {
 			System.out.println("Could not read ratingItem json. " + e1);
@@ -103,15 +103,15 @@ public class RatingItem {
     	String user_id ="";
     	String date ="";
     	String item_id = "";
-    	int rating = 0;
+    	String rating = "";
     	String comment ="";
 
 		try {
 			jsonRatingItem = (JSONObject) parser.parse(stringJsonRatingItem);
-	    	user_id = (String) jsonRatingItem.get("UserID");
+	    	user_id = (String) jsonRatingItem.get("UserID").toString();
 	    	date = (String) jsonRatingItem.get("Date");
-	    	item_id = (String) jsonRatingItem.get("ItemID");
-	    	rating = (int) jsonRatingItem.get("Rating");
+	    	item_id = (String) jsonRatingItem.get("ItemID").toString();
+	    	rating = (String) jsonRatingItem.get("Rating").toString();
 	    	comment = (String) jsonRatingItem.get("Comment");
 		} catch (ParseException e1) {
 			System.out.println("Could not read ratingItem json. " + e1);

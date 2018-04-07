@@ -325,7 +325,7 @@ public class Rater {
 
 		try {
 			jsonRater = (JSONObject) parser.parse(stringJsonRater);
-	    	user_id = (String) jsonRater.get("userID");
+	    	user_id = (String) jsonRater.get("UserID").toString();
 	    	email = (String) jsonRater.get("email");
 	    	join_date = (String) jsonRater.get("join_date");
 	    	type = (String) jsonRater.get("type");

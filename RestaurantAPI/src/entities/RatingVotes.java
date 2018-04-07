@@ -48,9 +48,9 @@ public class RatingVotes {
 
 		try {
 			jsonRatingVote = (JSONObject) parser.parse(stringJsonRatingVote);
-	    	user_id = (String) jsonRatingVote.get("UserID");
-	    	rater_id = (String) jsonRatingVote.get("RaterID");
-	    	restaurant_id = (String) jsonRatingVote.get("RestaurantID");
+	    	user_id = (String) jsonRatingVote.get("UserID").toString();
+	    	rater_id = (String) jsonRatingVote.get("RaterID").toString();
+	    	restaurant_id = (String) jsonRatingVote.get("RestaurantID").toString();
 	    	date = (String) jsonRatingVote.get("Date");
 	    	type = (String) jsonRatingVote.get("Type");
 		} catch (ParseException e1) {
@@ -108,9 +108,9 @@ public class RatingVotes {
 
 		try {
 			jsonRatingVote = (JSONObject) parser.parse(stringJsonRatingVote);
-	    	user_id = (String) jsonRatingVote.get("UserID");
-	    	rater_id = (String) jsonRatingVote.get("RaterID");
-	    	restaurant_id = (String) jsonRatingVote.get("RestaurantID");
+	    	user_id = (String) jsonRatingVote.get("UserID").toString();
+	    	rater_id = (String) jsonRatingVote.get("RaterID").toString();
+	    	restaurant_id = (String) jsonRatingVote.get("RestaurantID").toString();
 	    	date = (String) jsonRatingVote.get("Date");
 	    	type = (String) jsonRatingVote.get("Type");
 		} catch (ParseException e1) {
