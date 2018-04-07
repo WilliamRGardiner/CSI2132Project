@@ -66,7 +66,7 @@ public class RatingVotes {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO ratingVotes(userID, raterID, restaurantID, date, type) VALUES ('"+user_id+"', '"+rater_id+"', '"+restaurant_id+"', "+date+", '"+type+"')");
+            rs  = st.executeQuery("INSERT INTO ratingVotes(userID, raterID, restaurantID, date, type) VALUES ("+user_id+", "+rater_id+", "+restaurant_id+", '"+date+"', '"+type+"')");
            
             rs.close();
             st.close();
@@ -126,7 +126,7 @@ public class RatingVotes {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE ratingItem set type ="+ type +" WHERE userID="+user_id+" AND raterID="+rater_id+" AND restaurantID="+restaurant_id+" AND date="+date);
+            rs  = st.executeQuery("UPDATE ratingItem SET type ='"+ type +"' WHERE userID="+user_id+" AND raterID="+rater_id+" AND restaurantID="+restaurant_id+" AND date='"+date+"'");
            
             rs.close();
             st.close();
@@ -164,7 +164,7 @@ public class RatingVotes {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("DELETE FROM project.ratingVotes WHERE userID="+user_id+" AND raterID="+rater_id+" AND restaurantID="+restaurant_id+" AND date="+date);
+            rs  = st.executeQuery("DELETE FROM project.ratingVotes WHERE userID="+user_id+" AND raterID="+rater_id+" AND restaurantID="+restaurant_id+" AND date='"+date+"'");
             rs.close();
             st.close();
             }catch(Exception e){

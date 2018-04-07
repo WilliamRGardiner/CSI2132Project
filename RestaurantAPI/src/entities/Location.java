@@ -69,7 +69,7 @@ public class Location {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO location(open_date, manager_name, phone_number, address, opening_time, closing_time, restaurantID) VALUES ('"+open_date+"', '"+manager_name+"', '"+phone_number+"', '"+address+"', '"+hour_open+"', '"+hour_close+"', '"+restaurant_id+"')");
+            rs  = st.executeQuery("INSERT INTO location(open_date, manager_name, phone_number, address, opening_time, closing_time, restaurantID) VALUES ('"+open_date+"', '"+manager_name+"', '"+phone_number+"', '"+address+"', '"+hour_open+"', '"+hour_close+"', "+restaurant_id+")");
            
             rs.close();
             st.close();
@@ -137,7 +137,7 @@ public class Location {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE location set open_date ="+ open_date +", manager_name ="+ manager_name+", phone_number ="+ phone_number+", address ="+ address+", hour_open ="+ hour_open +", hour_close="+hour_close+", restaurant_id ="+ restaurant_id +" WHERE location_id="+location_id);
+            rs  = st.executeQuery("UPDATE location SET open_date ='"+ open_date +"', manager_name ='"+ manager_name+"', phone_number ='"+ phone_number+"', address ='"+ address+"', hour_open ='"+ hour_open +"', hour_close='"+hour_close+"', restaurant_id ="+ restaurant_id +" WHERE location_id="+location_id);
            
             rs.close();
             st.close();

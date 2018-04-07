@@ -83,7 +83,7 @@ public class Rater {
                 }
             	
             	if(totalVote==0){
-            		rJson.put("reputation", 0);
+            		rJson.put("reputation", 1);
             	}
             	else{
             		rJson.put("reputation", (upVote/totalVote)*5);
@@ -153,7 +153,7 @@ public class Rater {
                 }
             	
             	if(totalVote==0){
-            		json.put("Reputation", 0);
+            		json.put("Reputation", 1);
             	}
             	else{
             		json.put("Reputation", (upVote/totalVote)*5);
@@ -344,7 +344,7 @@ public class Rater {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE rater set email ="+ email +", join_date ="+ join_date+", type ="+ type+", username ="+ username+", password ="+ password +" WHERE userID="+user_id);
+            rs  = st.executeQuery("UPDATE rater set email ='"+ email +"', join_date ='"+ join_date+"', type ='"+ type+"', username ='"+ username+"', password ='"+ password +"' WHERE userID="+user_id);
            
             rs.close();
             st.close();

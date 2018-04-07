@@ -66,7 +66,7 @@ public class RatingItem {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO ratingItem(userID, date, itemID, rating, comments) VALUES ('"+user_id+"', '"+date+"', '"+item_id+"', "+rating+", '"+comment+"')");
+            rs  = st.executeQuery("INSERT INTO ratingItem(userID, date, itemID, rating, comments) VALUES ("+user_id+", '"+date+"', "+item_id+", "+rating+", '"+comment+"')");
            
             rs.close();
             st.close();
@@ -126,7 +126,7 @@ public class RatingItem {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE ratingItem set rating ="+ rating +", comments ="+ comment+" WHERE userID="+user_id+" AND date="+date+" AND itemID="+item_id);
+            rs  = st.executeQuery("UPDATE ratingItem set rating ="+ rating +", comments ='"+ comment+"' WHERE userID="+user_id+" AND date='"+date+"' AND itemID="+item_id);
            
             rs.close();
             st.close();

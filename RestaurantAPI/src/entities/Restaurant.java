@@ -489,7 +489,7 @@ public class Restaurant {
     }
     
     //-------------------------------------------------------------------------------------------
-    ///RestaurantAPI/rest/restaurant/get/<rid>/rating
+    ///RestaurantAPI/rest/restaurant/get/<rid>/rating/<uid>/<date>
     //-------------------------------------------------------------------------------------------
     @GET
 	@Path("/get/{rid}/rating/{uid}/{date}")
@@ -499,7 +499,7 @@ public class Restaurant {
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/rating","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/rating");
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/rating/<uid>/<date>","/RestaurantAPI/rest/restaurant/get/<rid>/rating/<uid>/<date>");
         
         JSONObject json = new JSONObject();
         JSONArray jArray = new JSONArray();
@@ -624,7 +624,7 @@ public class Restaurant {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE restaurant set name ="+ name +", type ="+ type +", url ="+ URL +" WHERE restaurantID="+restaurant_id);
+            rs  = st.executeQuery("UPDATE restaurant set name ='"+ name +"', type ='"+ type +"', url ='"+ URL +"' WHERE restaurantID="+restaurant_id);
            
             rs.close();
             st.close();
