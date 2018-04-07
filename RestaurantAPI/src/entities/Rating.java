@@ -162,22 +162,22 @@ public class Rating {
     }
     
     //-------------------------------------------------------------------------------------------
-    ///RestaurantAPI/rest/rating/DELETE/<uid>/<date>
+    ///RestaurantAPI/rest/rating/DELETE/<uid>/<date>/<rid>
     //-------------------------------------------------------------------------------------------
     @DELETE
-	@Path("/DELETE/{uid}/{date}")
-    public void deleteRating(@PathParam("uid") String user_id,@PathParam("date") String date) {
+	@Path("/DELETE/{uid}/{date}/{rid}")
+    public void deleteRating(@PathParam("uid") String user_id,@PathParam("date") String date,@PathParam("rid") String restaurant_id) {
     	
     	//Need to figure out how to not make a million database connections
     	DataAccess db;
         db= new DataAccess();
-        db.openConnection("/RestaurantAPI/rest/rating/DELETE/<uid>/<date>", "/RestaurantAPI/rest/rating/DELETE/"+user_id+"/"+date);
+        db.openConnection("/RestaurantAPI/rest/rating/DELETE/<uid>/<date>/<rid>", "/RestaurantAPI/rest/rating/DELETE/"+user_id+"/"+date+"/"+restaurant_id);
         
         connection = db.getConnection();
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("DELETE FROM project.rating WHERE userID="+user_id+" AND date='"+date+"'");
+            rs  = st.executeQuery("DELETE FROM project.rating WHERE userID="+user_id+" AND date='"+date+"' AND restaurantID="+restaurant_id);
             rs.close();
             st.close();
             }catch(Exception e){
