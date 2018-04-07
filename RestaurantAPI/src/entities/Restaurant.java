@@ -442,6 +442,49 @@ public class Restaurant {
     }
     
     //-------------------------------------------------------------------------------------------
+    ///RestaurantAPI/rest/restaurant/get/<rid>/ratingReview
+    //-------------------------------------------------------------------------------------------
+    @GET
+	@Path("/get/{rid}/ratingReview")
+	@Produces(MediaType.APPLICATION_JSON)
+    public String getRestaurantRatingReview(@PathParam("rid") int restaurant_id) {
+    	
+    	//Need to figure out how to not make a million database connections
+    	DataAccess db;
+        db= new DataAccess();
+        db.openConnection("/RestaurantAPI/rest/restaurant/get/<rid>/ratingReview","/RestaurantAPI/rest/restaurant/get/"+restaurant_id+"/ratingReview");
+        
+        JSONObject json = new JSONObject();
+        JSONArray jArray = new JSONArray();
+
+        connection = db.getConnection();
+
+        try{
+            st = connection.createStatement();
+            rs  = st.executeQuery("SELECT * FROM project.ratingvotes WHERE restaurantID="+restaurant_id);
+            while (rs.next())
+            {
+            		JSONObject rJson = new JSONObject();
+                	rJson.put("UserID", rs.getString("userID"));
+                	rJson.put("Type", rs.getString("type"));
+                	
+                	jArray.add(rJson);	
+            }
+            json.put("ratingreviews", jArray);
+            rs.close();
+            st.close();
+            }catch(Exception e){
+                System.out.println("Cant read from rating table:" + e);
+            }
+                	
+        	String returnJson = json.toString();
+        
+        	db.closeConnection();
+        
+            return returnJson;
+    }
+    
+    //-------------------------------------------------------------------------------------------
     ///RestaurantAPI/rest/restaurant/get/<rid>/menuItem/<mid>/rating
     //-------------------------------------------------------------------------------------------
     @GET
