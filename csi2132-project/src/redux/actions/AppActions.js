@@ -3,7 +3,8 @@ const ACTION_TYPES = {
     SIGN_IN_ATTEMPT: "SIGN_IN_ATTEMPT",
     SET_PAGE: "SET_PAGE",
     SET_RESTAURANT_CATEGORY: "SET_RESTAURANT_CATEGORY",
-    SET_MENU_ITEM_CATEGORY: "SET_MENU_ITEM_CATEGORY"
+    SET_MENU_ITEM_CATEGORY: "SET_MENU_ITEM_CATEGORY",
+    OPEN_UPDATE_RATER: "OPEN_UPDATE_RATER"
 }
 
 export default {
@@ -27,6 +28,10 @@ export default {
 
   setMenuItemCategory: (payload) => {
     return { type: ACTION_TYPES.SET_MENU_ITEM_CATEGORY, payload}
+  },
+
+  openUpdateRater: (payload) => {
+    return { type: ACTION_TYPES.OPEN_UPDATE_RATER, payload }
   }
 
 }

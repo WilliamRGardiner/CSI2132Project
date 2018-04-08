@@ -29,6 +29,8 @@ class ItemHeader extends Component {
           <span style={styles.title}>{ this.props.title }</span><br />
           <span style={styles.secondLine}>{ this.props.subtitle }{ this.props.rating ? <Rating value={this.props.rating} /> : this.props.thirdLine}</span>
         </div>
+        <div> {this.props.content} </div>
+        <div> {this.props.actions} </div>
       </ Paper>
     )
   }

@@ -25,6 +25,8 @@ import Adder from '../components/Adder'
 import LocationDialog from '../components/LocationDialog'
 import MenuItemDialog from '../components/MenuItemDialog'
 import RatingDialog from '../components/RatingDialog'
+import RestaurantDialog from '../components/RestaurantDialog'
+import CustomFlatButton from '../components/CustomFlatButton'
 
 
 class Restaurant extends Component {
@@ -42,6 +44,14 @@ class Restaurant extends Component {
 
   handleAddMenuItem = () => {
     this.props.store.dispatch(AdderActions.openAddMenuItem(this.props.store.getState().items.restaurant.selected))
+  }
+
+  handleDelete = () => {
+    this.props.store.dispatch(AdderActions.openDelete(this.props.store.getState().items.restaurant.selected))
+  }
+
+  handleEdit = () => {
+    this.props.store.dispatch(AdderActions.openUpdate(this.props.store.getState().items.restaurant.selected))
   }
 
   render() {
@@ -77,6 +87,21 @@ class Restaurant extends Component {
     var loctionItems = restaurant && restaurant.locations ? restaurant.locations.map(item => <LocationListItem store={this.props.store} item={item} />) : <div></div>
 
     var adder = this.props.store.getState().adder
+    var adders = true//this.props.store.getState().app.user
+
+    var actions =
+      <div>
+        <CustomFlatButton
+          label="Edit"
+          primary={this.props.primary}
+          onClick={this.handleEdit}
+        />
+        <CustomFlatButton
+          label="Delete"
+          primary={this.props.primary}
+          onClick={this.handleDelete}
+        />
+      </div>
 
     return (
       <div>
@@ -85,36 +110,51 @@ class Restaurant extends Component {
           title={restaurant.Name}
           subtitle={restaurant.Type}
           rating={restaurant.Rating || "0"}
+          content=""
+          actions={actions}
         />
         <br />
         <Paper style={{padding: "10px", height: "500px"}}>
           <Tabs style={styles.tab}>
             <Tab label="Menu" >
               {menuItems}
-              <Adder
-                label="Add MenuItem"
-                onClick={this.handleAddMenuItem}
-                primary={true}
-              />
+              {
+                adders ?
+                  <Adder
+                    label="Add MenuItem"
+                    onClick={this.handleAddMenuItem}
+                    primary={true}
+                  />
+                : <div></div>
+              }
             </Tab>
             <Tab style={styles.tab} label="Ratings" >
               {ratingItems}
-              <Adder
-                label="Add Review"
-                onClick={this.handleAddRating}
-                primary={true}
-              />
+              {
+                adders ?
+                  <Adder
+                    label="Add Review"
+                    onClick={this.handleAddRating}
+                    primary={true}
+                  />
+                : <div></div>
+              }
             </Tab>
             <Tab style={styles.tab} label="Locations" >
               {loctionItems}
-              <Adder
-                label="Add Location"
-                onClick={this.handleAddLocation}
-                primary={true}
-              />
+              {
+                adders ?
+                  <Adder
+                    label="Add Location"
+                    onClick={this.handleAddLocation}
+                    primary={true}
+                  />
+                : <div></div>
+              }
             </Tab>
           </ Tabs>
         </Paper>
+        <RestaurantDialog store={this.props.store} updater={true} />
         <RatingDialog store={this.props.store} />
         <MenuItemDialog store={this.props.store} />
         <LocationDialog store={this.props.store} />

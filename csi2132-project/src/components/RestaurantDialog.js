@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import muiThemeable from 'material-ui/styles/muiThemeable'
 
 import AdderActions from '../redux/actions/AdderActions'
+import DatabaseActions from '../redux/actions/DatabaseActions'
 
 import Dialog from 'material-ui/Dialog';
 import CustomFlatButton from '../components/CustomFlatButton'
@@ -14,6 +15,9 @@ class RestaurantDialog extends Component {
   }
 
   handleSubmit = () => {
+    const adder = this.props.store.getState().adder
+    if(adder.open == "update") this.props.store.dispatch(DatabaseActions.updateRestaurant(adder.object))
+    else this.props.store.dispatch(DatabaseActions.addRestaurant(adder.object))
     this.props.store.dispatch(AdderActions.submitAdder())
   }
 
@@ -26,7 +30,7 @@ class RestaurantDialog extends Component {
     const state = this.props.store.getState().adder
     const actions = [
       <CustomFlatButton
-        label="Create"
+        label="Submit"
         onClick={this.handleSubmit}
       />,
       <CustomFlatButton
@@ -40,7 +44,7 @@ class RestaurantDialog extends Component {
           title="New Restaurant"
           actions={actions}
           modal={false}
-          open={state.open == "restaurant"}
+          open={state.open == "restaurant" || (state.open == "update" && this.props.updater) || false}
           onRequestClose={this.handleCancel}
         >
         <TextField

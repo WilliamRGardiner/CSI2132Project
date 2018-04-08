@@ -3,8 +3,10 @@ const ACTION_TYPES = {
     OPEN_ADD_MENU_ITEM: "OPEN_ADD_MENU_ITEM",
     OPEN_ADD_RATING: "OPEN_ADD_RATING",
     OPEN_ADD_LOCATION: "OPEN_ADD_LOCATION",
+    OPEN_UPDATE: "OPEN_UPDATE",
+    OPEN_DELETE: "OPEN_DELETE",
     CLOSE_ADDER: "CLOSE_ADDER",
-    SUBMIT: "SUBMIT_ADD_RESTAURANT",
+    SUBMIT: "SUBMIT_ADDER",
     UPDATE_FIELD: "UPDATE_FIELD"
 }
 
@@ -25,6 +27,14 @@ export default {
 
   openAddRating: (user, restaurant, menuItem) => {
     return { type: ACTION_TYPES.OPEN_ADD_RATING, payload: { user, restaurant, menuItem}}
+  },
+
+  openUpdate: (payload) => {
+    return { type: ACTION_TYPES.OPEN_UPDATE, payload }
+  },
+
+  openDelete: (payload) => {
+    return { type: ACTION_TYPES.OPEN_DELETE, payload}
   },
 
   closeAdder: () => {

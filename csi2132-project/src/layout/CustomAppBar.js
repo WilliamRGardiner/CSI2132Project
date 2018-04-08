@@ -22,15 +22,15 @@ import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 
 //Icons
-import SearchIcon from 'material-ui/svg-icons/action/search'
+import HomeIcon from 'material-ui/svg-icons/action/home'
 
 class CustomAppBar extends Component {
   constructor(props) {
     super(props)
   }
 
-  handleSearch = (searchString) => {
-    this.props.store.dispatch(NavbarActions.setSearchString(searchString))
+  handleHomeClick = () => {
+    this.props.store.dispatch(AppActions.setPage(appConstants.PAGES.HOME))
   }
 
   handlePopoverOpen = (event) => {
@@ -77,16 +77,11 @@ class CustomAppBar extends Component {
       <Paper>
         <Toolbar>
           <ToolbarGroup>
-            <IconButton>
-              <SearchIcon />
+            <IconButton
+              onClick={this.handleHomeClick}
+            >
+              <HomeIcon />
             </IconButton>
-            <AutoComplete
-              dataSource={state.navbar.dataSource}
-              onUpdateInput={_.debounce(this.handleSearch, 2000)}
-              onNewRequest={this.handleSearch}
-              floatingLabelText="Search"
-              style={{paddingBottom: "20px"}}
-            />
           </ToolbarGroup>
           <ToolbarGroup>
             { !state.app.user ?

@@ -45,127 +45,143 @@ const ACTION_TYPES = {
 export default {
   ACTIONS: ACTION_TYPES,
 
-  fetchAllRestaurants: (store) => {
+  fetchAllRestaurants: () => {
     return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get")}
   },
 
-  fetchRestaurant: (id, store) => {
+  fetchRestaurant: (id) => {
     return { type: ACTION_TYPES.FETCH_RESTAURANT, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+id)}
   },
 
-  fetchAllRestaurantsInCategory: (category, store) => {
+  fetchAllRestaurantsInCategory: (category) => {
     return { type: ACTION_TYPES.FETCH_ALL_RESTAURANTS_IN_CATEGORY, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/category/get/"+category+"/restaurant") }
   },
 
-  fetchAllRatings: (restaurantID, store) => {
+  fetchAllRatings: (restaurantID) => {
     return { type: ACTION_TYPES.FETCH_ALL_RATINGS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating") }
   },
 
-  fetchRating: (restaurantID, userID, date, id, store) => {
+  fetchRating: (restaurantID, userID, date, id) => {
     return { type: ACTION_TYPES.FETCH_RATING, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/rating"+userID+"/"+date) }
   },
 
-  fetchAllMenuItems: (restaurantID, store) => {
+  fetchAllRatingVotes: (restaurantID) => {
+    return { type: ACTION_TYPES.FETCH_RATING, payload: axios.get() }
+  },
+
+  fetchAllMenuItems: (restaurantID) => {
     return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem") }
   },
 
-  fetchMenuItem: (restaurantID, id, store) => {
+  fetchMenuItem: (restaurantID, id) => {
     return { type: ACTION_TYPES.FETCH_MENU_ITEM, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+id) }
   },
 
-  fetchAllMenuItemsInCategory: (category, store) => {
+  fetchAllMenuItemsInCategory: (category) => {
     return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEMS_IN_CATEGORY, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/category/get/"+category+"/menuItem") }
   },
 
-  fetchAllMenuItemRatings: (restaurantID, menuItemID, store) => {
+  fetchAllMenuItemRatings: (restaurantID, menuItemID) => {
     return { type: ACTION_TYPES.FETCH_ALL_MENU_ITEM_RATINGS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+menuItemID+"/rating") }
   },
 
-  fetchMenuItemRating: (restaurantID, menuItemID, userID, date, store) => {
+  fetchMenuItemRating: (restaurantID, menuItemID, userID, date) => {
     return { type: ACTION_TYPES.FETCH_MENU_ITEM_RATING, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/restaurant/get/"+restaurantID+"/menuItem/"+menuItemID+"/rating/"+userID+"/"+date) }
   },
 
-  fetchAllRaters: (store) => {
+  fetchAllRaters: () => {
     return { type: ACTION_TYPES.FETCH_ALL_RATERS, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/rater/get") }
   },
 
-  fetchRater: (id, store) => {
+  fetchRater: (id) => {
     return { type: ACTION_TYPES.FETCH_RATER, payload: axios.get(ADDRESS+"/RestaurantAPI/rest/rater/get/"+id) }
   },
 
-  updateRestaurant: () => {
-    return { type: ACTION_TYPES.UPDATE_RESTAURANT, payload: axios.put()}
+  updateRestaurant: (data) => {
+    return { type: ACTION_TYPES.UPDATE_RESTAURANT, payload: axios.put(ADDRESS+"RestaurantAPI/rest/restaurant/UPDATE", data)}
   },
 
-  updateMenuItem: () => {
-    return { type: ACTION_TYPES.UPDATE_MENU_ITEM, payload: axios.put()}
+  updateMenuItem: (data) => {
+    return { type: ACTION_TYPES.UPDATE_MENU_ITEM, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/menuItem/UPDATE", data)}
   },
 
-  updateRating: () => {
-    return { type: ACTION_TYPES.UPDATE_RATING, payload: axios.put()}
+  updateRating: (data) => {
+    return { type: ACTION_TYPES.UPDATE_RATING, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/rating/UPDATE", data)}
   },
 
-  updateMenuItemRating: () => {
-    return { type: ACTION_TYPES.UPDATE_MENU_ITEM_RATING, payload: axios.put()}
+  updateRatingVote: (data) => {
+    return { type: ACTION_TYPES.UPDATE_RATING, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/ratingVotes/UPDATE")}
   },
 
-  updateRater: () => {
-    return { type: ACTION_TYPES.UPDATE_RATER, payload: axios.put()}
+  updateMenuItemRating: (data) => {
+    return { type: ACTION_TYPES.UPDATE_MENU_ITEM_RATING, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/ratingItem/UPDATE", data)}
   },
 
-  updateLocation: () => {
-    return { type: ACTION_TYPES.UPDATE_LOCAITON, payload: axios.put()}
+  updateRater: (data) => {
+    return { type: ACTION_TYPES.UPDATE_RATER, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/rater/UPDATE", data)}
   },
 
-  addRestaurant: () => {
-    return { type: ACTION_TYPES.ADD_RESTAURANT, payload: axios.post()}
+  updateLocation: (data) => {
+    return { type: ACTION_TYPES.UPDATE_LOCAITON, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/location/UPDATE", data)}
   },
 
-  addMenuItem: () => {
-    return { type: ACTION_TYPES.ADD_MENU_ITEM, payload: axios.post()}
+  addRestaurant: (data) => {
+    return { type: ACTION_TYPES.ADD_RESTAURANT, payload: axios.post(ADDRESS+"RestaurantAPI/rest/restaurant/ADD", data)}
   },
 
-  addRating: () => {
-    return { type: ACTION_TYPES.ADD_RATING, payload: axios.post()}
+  addMenuItem: (data) => {
+    return { type: ACTION_TYPES.ADD_MENU_ITEM, payload: axios.post(ADDRESS+"/RestaurantAPI/rest/menuItem/ADD", data)}
   },
 
-  addMenuItemRating: () => {
-    return { type: ACTION_TYPES.ADD_MENU_ITEM_RATING, payload: axios.post()}
+  addRating: (data) => {
+    return { type: ACTION_TYPES.ADD_RATING, payload: axios.post(ADDRESS+"/RestaurantAPI/rest/rating/ADD", data)}
   },
 
-  addRater: () => {
-    return { type: ACTION_TYPES.ADD_RATER, payload: axios.post()}
+  addRatingVote: (data) => {
+    return { type: ACTION_TYPES.ADD_RATING, payload: axios.post(ADDRESS+"/RestaurantAPI/rest/ratingVotes/ADD", data)}
   },
 
-  addLocation: () => {
-    return { type: ACTION_TYPES.ADD_LOCAITON, payload: axios.post()}
+  addMenuItemRating: (data) => {
+    return { type: ACTION_TYPES.ADD_MENU_ITEM_RATING, payload: axios.post(ADDRESS+"/RestaurantAPI/rest/ratingItem/ADD", data)}
   },
 
-  deleteRestaurant: () => {
-    return { type: ACTION_TYPES.DELETE_RESTAURANT, payload: axios.del()}
+  addRater: (data) => {
+    return { type: ACTION_TYPES.ADD_RATER, payload: axios.post(ADDRESS+"/RestaurantAPI/rest/rater/ADD", data)}
   },
 
-  deleteMenuItem: () => {
-    return { type: ACTION_TYPES.DELETE_MENU_ITEM, payload: axios.del()}
+  addLocation: (data) => {
+    return { type: ACTION_TYPES.ADD_LOCAITON, payload: axios.post(ADDRESS+"/RestaurantAPI/rest/location/ADD", data)}
   },
 
-  deleteRating: () => {
-    return { type: ACTION_TYPES.DELETE_RATING, payload: axios.del()}
+  deleteRestaurant: (restaurantId) => {
+    return { type: ACTION_TYPES.DELETE_RESTAURANT, payload: axios.delete(ADDRESS+"RestaurantAPI/rest/restaurant/DELETE/"+restaurantId)}
   },
 
-  deleteMenuItemRating: () => {
-    return { type: ACTION_TYPES.DELETE_MENU_ITEM_RATING, payload: axios.del()}
+  deleteMenuItem: (menuItemID) => {
+    return { type: ACTION_TYPES.DELETE_MENU_ITEM, payload: axios.delete(ADDRESS+"/RestaurantAPI/rest/menuItem/DELETE/"+menuItemID)}
   },
 
-  deleteRater: () => {
-    return { type: ACTION_TYPES.DELETE_RATER, payload: axios.del()}
+  deleteRating: (raterID, date, restaurantID) => {
+    return { type: ACTION_TYPES.DELETE_RATING, payload: axios.delete(ADDRESS+"/RestaurantAPI/rest/rating/DELETE/"+raterID+"/"+date+"/"+restaurantID)}
   },
 
-  deleteLocation: () => {
-    return { type: ACTION_TYPES.DELETE_LOCAITON, payload: axios.del()}
+  deleteRatingVote: (userID, raterID, date, restaurantID) => {
+    return { type: ACTION_TYPES.DELETE_RATING, payload: axios.delete(ADDRESS+"/RestaurantAPI/rest/ratingVotes/DELETE/"+userID+"/"+raterID+"/"+restaurantID+"/"+date)}
   },
 
-  login: (data, store) => {
-    return { type: ACTION_TYPES.LOGIN, payload: axios.post()}
+  deleteMenuItemRating: (userID, date, itemID) => {
+    return { type: ACTION_TYPES.DELETE_MENU_ITEM_RATING, payload: axios.delete(ADDRESS+"/RestaurantAPI/rest/ratingItem/DELETE/"+userID+"/"+date+"/"+itemID)}
+  },
+
+  deleteRater: (raterID) => {
+    return { type: ACTION_TYPES.DELETE_RATER, payload: axios.delete(ADDRESS+"/RestaurantAPI/rest/rater/DELETE/"+raterID)}
+  },
+
+  deleteLocation: (locationID) => {
+    return { type: ACTION_TYPES.DELETE_LOCAITON, payload: axios.delete(ADDRESS+"/RestaurantAPI/rest/location/DELETE/"+locationID)}
+  },
+
+  login: (data) => {
+    return { type: ACTION_TYPES.LOGIN, payload: axios.post(ADDRESS+"/login", data)}
   }
 }

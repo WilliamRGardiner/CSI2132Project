@@ -25,8 +25,8 @@ export default (state, action) => {
       break
     case actions.ACTIONS.OPEN_ADD_RATING:
       newState.open =  "rating"
-      newState.objecn =  {
-        "UserID": action.payload.user.UserID,
+      newState.object =  {
+        "UserID": action.payload.user ? action.payload.user.UserID : "0",
         "Price": "0",
         "menuItemID": action.payload.menuItem ? action.payload.menuItem.ItemID : "",
         "Food": "0",
@@ -38,7 +38,7 @@ export default (state, action) => {
       break
     case actions.ACTIONS.OPEN_ADD_LOCATION:
       newState.open =  "location"
-      newState.objecn =  {
+      newState.object =  {
         "RestaurantID": action.payload.RestaurantID,
         "Street-address": "",
         "Hour-open": "",
@@ -48,11 +48,16 @@ export default (state, action) => {
         "Manager-name": ""
       }
       break
+    case actions.ACTIONS.OPEN_UPDATE:
+      newState.open =  "update"
+      newState.object =  JSON.parse(JSON.stringify(action.payload))
+      break
+    case actions.ACTIONS.OPEN_DELETE:
+      newState.open =  "delete"
+      break
     case actions.ACTIONS.CLOSE_ADDER:
       newState.open = null
       newState.object = {}
-      break
-    case actions.ACTIONS.SUBMIT:
       break
     case actions.ACTIONS.UPDATE_FIELD:
       newState.object[action.payload.field] = action.payload.value
