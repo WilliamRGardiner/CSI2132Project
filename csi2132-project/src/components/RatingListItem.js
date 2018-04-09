@@ -27,6 +27,8 @@ class RatingListItem extends Component {
 
   render() {
 
+    const state = this.props.store.getState().items.rater
+
     var ratingSum = 0
     var ratingCount = 0
 
@@ -37,7 +39,7 @@ class RatingListItem extends Component {
 
     return (
       <StandardListItem
-        title={this.props.item.UserID}
+        title={state.list.filter(item => this.props.item.UserID == item.UserID).length > 0 ? state.list.filter(item => this.props.item.UserID == item.UserID)[0].Username : this.props.item.UserID}
         subtitle={<Rating value={this.props.item.Rating || (ratingSum/ratingCount)} />}
         image={MissingImage}
         expandable={(

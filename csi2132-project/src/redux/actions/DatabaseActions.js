@@ -98,11 +98,21 @@ export default {
   },
 
   updateRestaurant: (data) => {
-    return { type: ACTION_TYPES.UPDATE_RESTAURANT, payload: axios.put(ADDRESS+"RestaurantAPI/rest/restaurant/UPDATE", data)}
+    return { type: ACTION_TYPES.UPDATE_RESTAURANT, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/restaurant/UPDATE", data)}
   },
 
   updateMenuItem: (data) => {
-    return { type: ACTION_TYPES.UPDATE_MENU_ITEM, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/menuItem/UPDATE", data)}
+    return { type: ACTION_TYPES.UPDATE_MENU_ITEM, payload:
+    // axios({
+    //   method: 'put',
+    //   url: ADDRESS+"/RestaurantAPI/rest/menuItem/UPDATE",
+    //   data: data,
+    //   headers: {
+    //     'accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   }
+    // }) }
+      axios.put(ADDRESS+"/RestaurantAPI/rest/menuItem/UPDATE", data)}
   },
 
   updateRating: (data) => {
@@ -126,7 +136,7 @@ export default {
   },
 
   addRestaurant: (data) => {
-    return { type: ACTION_TYPES.ADD_RESTAURANT, payload: axios.post(ADDRESS+"RestaurantAPI/rest/restaurant/ADD", data)}
+    return { type: ACTION_TYPES.ADD_RESTAURANT, payload: axios.post(ADDRESS+"/RestaurantAPI/rest/restaurant/ADD", data)}
   },
 
   addMenuItem: (data) => {
@@ -154,7 +164,7 @@ export default {
   },
 
   deleteRestaurant: (restaurantId) => {
-    return { type: ACTION_TYPES.DELETE_RESTAURANT, payload: axios.delete(ADDRESS+"RestaurantAPI/rest/restaurant/DELETE/"+restaurantId)}
+    return { type: ACTION_TYPES.DELETE_RESTAURANT, payload: axios.delete(ADDRESS+"/RestaurantAPI/rest/restaurant/DELETE/"+restaurantId)}
   },
 
   deleteMenuItem: (menuItemID) => {
