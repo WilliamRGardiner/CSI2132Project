@@ -102,17 +102,7 @@ export default {
   },
 
   updateMenuItem: (data) => {
-    return { type: ACTION_TYPES.UPDATE_MENU_ITEM, payload:
-    // axios({
-    //   method: 'put',
-    //   url: ADDRESS+"/RestaurantAPI/rest/menuItem/UPDATE",
-    //   data: data,
-    //   headers: {
-    //     'accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   }
-    // }) }
-      axios.put(ADDRESS+"/RestaurantAPI/rest/menuItem/UPDATE", data)}
+    return { type: ACTION_TYPES.UPDATE_MENU_ITEM, payload: axios.put(ADDRESS+"/RestaurantAPI/rest/menuItem/UPDATE", data)}
   },
 
   updateRating: (data) => {
