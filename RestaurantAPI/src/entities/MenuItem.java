@@ -68,7 +68,7 @@ public class MenuItem {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO menuItem(name, type, category, description, price, restaurantID) VALUES ('"+name+"', '"+type+"', '"+category+"', '"+description+"', "+price+", "+restaurant_id+")");
+            rs  = st.executeQuery("INSERT INTO menuItem(name, type, category, description, price, restaurantID) VALUES ('"+name+"', '"+type+"', '"+category+"', '"+description.replaceAll("'", "''")+"', "+price+", "+restaurant_id+")");
            
             rs.close();
             st.close();
@@ -133,7 +133,7 @@ public class MenuItem {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE restaurant set name ='"+ name +"', type ='"+ type+"', category ='"+ category+"', description ='"+ description+"', price ="+ price +", restaurantID ="+ restaurant_id +" WHERE itemID="+item_id);
+            rs  = st.executeQuery("UPDATE restaurant set name ='"+ name +"', type ='"+ type+"', category ='"+ category+"', description ='"+ description.replaceAll("'", "''")+"', price ="+ price +", restaurantID ="+ restaurant_id +" WHERE itemID="+item_id);
            
             rs.close();
             st.close();

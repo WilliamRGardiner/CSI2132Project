@@ -64,7 +64,7 @@ public class Category {
                 		while (rs2.next())
                 		{
                 			JSONObject jsonLocation = new JSONObject();
-                			jsonLocation.put("LocationID", rs2.getString("location_id"));
+                			jsonLocation.put("LocationID", rs2.getString("locationID"));
                 			jsonLocation.put("FirstOpenDate", rs2.getString("open_date"));
                 			jsonLocation.put("ManagerName", rs2.getString("manager_name"));
                 			jsonLocation.put("PhoneNumber", rs2.getString("phone_number"));
@@ -312,7 +312,7 @@ public class Category {
     //-------------------------------------------------------------------------------------------
     ///RestaurantAPI/rest/category/get/<category>/menuItem
     //-------------------------------------------------------------------------------------------
-   /* @GET
+   @GET
 	@Path("/get/{category}/menuItem")
 	@Produces(MediaType.APPLICATION_JSON)
     public String getRestaurantMenuItemsCategories(@PathParam("category") String category) {
@@ -369,12 +369,12 @@ public class Category {
         	db.closeConnection();
         
             return returnJson;
-    }*/
+    }
     
     //-------------------------------------------------------------------------------------------
     ///RestaurantAPI/rest/category/get/<type>/menuItem
     //-------------------------------------------------------------------------------------------
-    @GET
+   /* @GET
 	@Path("/get/{type}/menuItem")
 	@Produces(MediaType.APPLICATION_JSON)
     public String getRestaurantMenuItemsTypes(@PathParam("type") String type) {
@@ -431,6 +431,6 @@ public class Category {
         	db.closeConnection();
         
             return returnJson;
-    }
+    }*/
     
 }

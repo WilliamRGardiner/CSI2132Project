@@ -146,3 +146,101 @@ LEFT JOIN
 		GROUP BY restaurant2.restaurantID) temp
 	ON restaurant1.restaurantID=temp.restaurant2ID
 	ORDER BY temp.avgRate DESC
+	
+--K)
+SELECT E.name, join_date, reputation.reputation, B.name, A.date
+FROM rater E 
+JOIN (SELECT raterid, COALESCE(upvotes, 0) / (COALESCE(upvotes, 0) + COALESCE(downvotes, 0)) * 4 + 1 AS reputation
+				FROM(SELECT COALESCE(uid, did) AS raterid, upvotes, downvotes 
+					 FROM((SELECT raterid AS uid, count(*) AS upvotes
+							FROM ratingvotes
+         					WHERE ratingvotes.type='UP'
+          					GROUP BY raterid
+        				   ) AS U
+        					FULL OUTER JOIN(
+        						SELECT raterid AS did, count(*) AS downvotes
+       							FROM ratingvotes
+         						WHERE ratingvotes.type='DOWN'
+         						GROUP BY raterid
+      						) AS D ON uid = did ) AS R )As rep) As reputation on E.userID=reputation.raterid
+JOIN rating A on E.userID= A.userID
+JOIN restaurant B on A.restaurantID = B.RestaurantID
+WHERE ((((food + mood)/2)) >= (SELECT MAX((food + mood)/2)
+								FROM rating));
+								
+								
+								
+
+
+--L)
+SELECT E.name, reputation.reputation, B.name, A.date
+FROM rater E 
+JOIN (SELECT raterid, COALESCE(upvotes, 0) / (COALESCE(upvotes, 0) + COALESCE(downvotes, 0)) * 4 + 1 AS reputation
+				FROM(SELECT COALESCE(uid, did) AS raterid, upvotes, downvotes 
+					 FROM((SELECT raterid AS uid, count(*) AS upvotes
+							FROM ratingvotes
+         					WHERE ratingvotes.type='UP'
+          					GROUP BY raterid
+        				   ) AS U
+        					FULL OUTER JOIN(
+        						SELECT raterid AS did, count(*) AS downvotes
+       							FROM ratingvotes
+         						WHERE ratingvotes.type='DOWN'
+         						GROUP BY raterid
+      						) AS D ON uid = did ) AS R )As rep) As reputation on E.userID=reputation.raterid
+JOIN rating A on E.userID= A.userID
+JOIN restaurant B on A.restaurantID = B.RestaurantID
+WHERE ((((food + mood)/2)) >= (SELECT MAX((food + mood)/2)
+								FROM rating));
+
+--M)
+SELECT E.name, reputation.reputation, A.comments, M.name, M.price
+FROM rater E
+JOIN (SELECT raterid, COALESCE(upvotes, 0) / (COALESCE(upvotes, 0) + COALESCE(downvotes, 0)) * 4 + 1 AS reputation
+				FROM(SELECT COALESCE(uid, did) AS raterid, upvotes, downvotes 
+					 FROM((SELECT raterid AS uid, count(*) AS upvotes
+							FROM ratingvotes
+         					WHERE ratingvotes.type='UP'
+          					GROUP BY raterid
+        				   ) AS U
+        					FULL OUTER JOIN(
+        						SELECT raterid AS did, count(*) AS downvotes
+       							FROM ratingvotes
+         						WHERE ratingvotes.type='DOWN'
+         						GROUP BY raterid
+      						) AS D ON uid = did ) AS R )As rep) As reputation on E.userID=reputation.raterid 
+JOIN rating A on E.userID= A.userID
+JOIN restaurant B on A.restaurantID = B.restaurantID
+JOIN menuitem M on B.restaurantID = M.restaurantID
+JOIN ratingitem I on M.itemID = I.itemID
+WHERE (E.name = (Select T2.name
+						from rater T2
+						JOIN rating A2 on T2.userID= A2.userID
+						JOIN restaurant B2 on A2.restaurantID = B2.restaurantID
+						where B2.name= 'The Fry'
+						group by T2.name
+						order by count(T2.name) desc
+						limit 1) AND B.name='The Fry');
+					
+				
+
+
+--N)
+SELECT R.name, R.email
+FROM rater R 
+JOIN rating A on R.userID= A.userID
+JOIN restaurant B on A.restaurantID = B.RestaurantID
+WHERE ((A.food +A.mood + A.staff)/3) > (SELECT MAX((A2.food +A2.mood + A2.staff)/3) 
+										FROM rater R2
+										JOIN rating A2 on R2.userID= A.userID
+										JOIN restaurant B on A.restaurantID = B.RestaurantID
+										Where R2.name ='John'
+										);
+										
+--O)
+
+SELECT E.name, E.type, E.email, B.name, A.food, A.mood,A.staff
+FROM rater E 
+JOIN rating A on E.userID= A.userID
+JOIN restaurant B on A.restaurantID = B.RestaurantID
+

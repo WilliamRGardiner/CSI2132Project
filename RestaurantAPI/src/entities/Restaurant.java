@@ -297,7 +297,7 @@ public class Restaurant {
                 	json.put("Name", rs.getString("name"));
                 	json.put("Type", rs.getString("type"));
                 	json.put("Category", rs.getString("category"));
-                	json.put("Description", rs.getString("description"));
+                	json.put("Description", rs.getString("description").replaceAll("'", "''"));
                 	json.put("Price", rs.getString("price"));
             	}
             }
@@ -422,7 +422,7 @@ public class Restaurant {
                 	rJson.put("Mood", rs.getInt("mood"));
                 	rJson.put("Staff", rs.getInt("staff"));
                 	rJson.put("Food", rs.getInt("food"));
-                	rJson.put("Comment", rs.getString("comments"));
+                	rJson.put("Comment", rs.getString("comments").replaceAll("'", "''"));
                 	rJson.put("RestaurantID", restaurant_id);
 
                 	jArray.add(rJson);	
@@ -466,7 +466,10 @@ public class Restaurant {
             {
             		JSONObject rJson = new JSONObject();
                 	rJson.put("UserID", rs.getString("userID"));
+                	rJson.put("RaterID", rs.getString("raterID"));
                 	rJson.put("Type", rs.getString("type"));
+                 	rJson.put("Date", rs.getString("date"));
+                	rJson.put("RestaurantID", rs.getString("restaurantID"));
                 	
                 	jArray.add(rJson);	
             }
@@ -513,7 +516,7 @@ public class Restaurant {
                 	rJson.put("UserID", rs.getString("userID"));
                 	rJson.put("Date", rs.getString("date"));
                 	rJson.put("Rating", rs.getInt("rating"));
-                	rJson.put("Comment", rs.getString("comments"));
+                	rJson.put("Comment", rs.getString("comments").replaceAll("'", "''"));
                 	jArray.add(rJson);	
             	}
             }

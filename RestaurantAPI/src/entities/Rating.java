@@ -70,7 +70,7 @@ public class Rating {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("INSERT INTO rating(userID, date, food, mood, staff, comments, restaurantID) VALUES ("+user_id+", '"+date+"', "+food+", "+mood+", "+staff+", '"+comments+"', "+restaurant_id+")");
+            rs  = st.executeQuery("INSERT INTO rating(userID, date, food, mood, staff, comments, restaurantID) VALUES ("+user_id+", '"+date+"', "+food+", "+mood+", "+staff+", '"+comments.replaceAll("'", "''")+"', "+restaurant_id+")");
            
             rs.close();
             st.close();
@@ -136,7 +136,7 @@ public class Rating {
 
         try{
             st = connection.createStatement();
-            rs  = st.executeQuery("UPDATE rating set food ="+ food +", mood ="+ mood+", staff ="+ staff+", comments ='"+ comments+"', restaurantID ="+ restaurant_id +" WHERE userID="+user_id+" AND date='"+date+"'");
+            rs  = st.executeQuery("UPDATE rating set food ="+ food +", mood ="+ mood+", staff ="+ staff+", comments ='"+ comments.replaceAll("'", "''")+"', restaurantID ="+ restaurant_id +" WHERE userID="+user_id+" AND date='"+date+"'");
            
             rs.close();
             st.close();
