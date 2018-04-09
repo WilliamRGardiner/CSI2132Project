@@ -52,8 +52,7 @@ FROM
       SELECT
         MAX(menuitem.price) AS maxPrice,
         restaurant.name AS name
-      FROM location
-      JOIN restaurant ON restaurant.restaurantid = location.restaurantid
+      FROM restaurant
       JOIN menuitem ON restaurant.restaurantid = menuitem.restaurantid
     	group by restaurant.restaurantid
     ) AS A
